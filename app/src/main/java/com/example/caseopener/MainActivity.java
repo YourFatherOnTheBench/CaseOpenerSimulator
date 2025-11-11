@@ -2,28 +2,29 @@ package com.example.caseopener;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.json.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private GridAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById.(R.id.block_container);
+        List<Skin> list = new ArrayList<>();
+        adapter = new GridAdapter(list);
 
-        try {
-            JSONObject obj = jsonUtils.getJSON(this, "skins_reduced_5skins.json");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        RecyclerView recyclerView = findViewById(R.id.block_container);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setAdapter(adapter);
+
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"));
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"));
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"));
     }
-
-
-
 }

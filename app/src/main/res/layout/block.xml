@@ -1,66 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:id="@+id/block"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:orientation="vertical"
         android:gravity="center"
         android:layout_width="205.5dp"
-        android:layout_height="125dp"
+        android:layout_height="155dp"
         android:id="@+id/skin1"
         android:padding="10dp"
         android:background="@color/gray"
         >
-        <TextView
-            android:id="@+id/nameSkin1"
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="75dp">
+
+        </ImageView>
+        <TextView
+            android:id="@+id/nameSkin"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textColor="@color/white">
 
         </TextView>
         <TextView
-            android:id="@+id/raritySkin1"
+            android:id="@+id/raritySkin"
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="20dp"
+            android:textColor="@color/white">
 
         </TextView>
         <TextView
-            android:id="@+id/wearSkin1"
+            android:id="@+id/wearSkin"
             android:layout_width="match_parent"
-            android:layout_height="30dp">
-
-        </TextView>
-
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
-        android:id="@+id/skin2"
-        android:layout_width="205.5dp"
-        android:layout_height="125dp"
-        android:padding="10dp"
-        android:background="@color/gray">
-        <TextView
-            android:id="@+id/nameSkin2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-        </TextView>
-        <TextView
-            android:id="@+id/raritySkin2"
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
-
-        </TextView>
-        <TextView
-            android:id="@+id/wearSkin2"
-            android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="20dp"
+            android:textColor="@color/white">
 
         </TextView>
 
     </LinearLayout>
 
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

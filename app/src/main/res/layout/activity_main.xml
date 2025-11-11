@@ -62,7 +62,7 @@
 
         </View>
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/block_container"
             android:layout_width="match_parent"
             android:layout_height="550dp"
@@ -70,7 +70,7 @@
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbars="vertical">
 
-        </ScrollView>
+        </androidx.recyclerview.widget.RecyclerView>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"

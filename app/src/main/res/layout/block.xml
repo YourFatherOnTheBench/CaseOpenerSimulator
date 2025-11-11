@@ -5,8 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
         android:layout_width="205.5dp"
-        android:layout_height="150dp">
+        android:layout_height="125dp"
+        android:id="@+id/skin1"
+        android:padding="10dp"
+        android:background="@color/gray"
+        >
+        <TextView
+            android:id="@+id/nameSkin1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/raritySkin1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/wearSkin1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+        </TextView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/skin2"
+        android:layout_width="205.5dp"
+        android:layout_height="125dp"
+        android:padding="10dp"
+        android:background="@color/gray">
+        <TextView
+            android:id="@+id/nameSkin2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/raritySkin2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+        </TextView>
+        <TextView
+            android:id="@+id/wearSkin2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+        </TextView>
 
     </LinearLayout>
 

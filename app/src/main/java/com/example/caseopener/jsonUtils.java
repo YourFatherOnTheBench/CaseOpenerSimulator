@@ -4,6 +4,7 @@ import android.content.Context;
 import org.json.JSONObject;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import com.google.gson.Gson;
 
 public class jsonUtils {
 

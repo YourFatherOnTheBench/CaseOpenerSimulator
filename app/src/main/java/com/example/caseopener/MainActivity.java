@@ -19,12 +19,27 @@ public class MainActivity extends AppCompatActivity {
         List<Skin> list = new ArrayList<>();
         adapter = new GridAdapter(list);
 
+
+
+
         RecyclerView recyclerView = findViewById(R.id.block_container);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(adapter);
 
-        adapter.addItem(new Skin("skin name", "rare", "field-tested"));
-        adapter.addItem(new Skin("skin name", "rare", "field-tested"));
-        adapter.addItem(new Skin("skin name", "rare", "field-tested"));
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
+        adapter.addItem(new Skin("skin name", "rare", "field-tested"),"#808080");
     }
 }

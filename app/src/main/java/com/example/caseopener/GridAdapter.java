@@ -1,27 +1,32 @@
 package com.example.caseopener;
+
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.List;
 
 public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
     private final List<Skin> items;
+    // String backgroundColor = "#808080"; // <-- REMOVE THIS LINE
 
     public GridAdapter(List<Skin> items) {
         this.items = items;
     }
 
+    // ViewHolder class remains the same
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView SkinName, Rarity, Wear;
+        LinearLayout SkinContainer;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            SkinContainer  = itemView.findViewById(R.id.skin);
             SkinName = itemView.findViewById(R.id.nameSkin);
             Rarity = itemView.findViewById(R.id.raritySkin);
             Wear = itemView.findViewById(R.id.wearSkin);
@@ -42,6 +47,9 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
         holder.SkinName.setText(item.getName());
         holder.Rarity.setText(item.getRarity());
         holder.Wear.setText(item.getWear());
+
+        // Use the color from the specific item
+        holder.SkinContainer.setBackgroundColor(Color.parseColor(item.getBackgroundColor()));
     }
 
     @Override
@@ -50,7 +58,9 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     }
 
     // Add new items
-    public void addItem(Skin item) {
+    public void addItem(Skin item, String background) {
+        // Set the color on the item object itself before adding it
+        item.setBackgroundColor(background);
         items.add(item);
         notifyItemInserted(items.size() - 1);
     }

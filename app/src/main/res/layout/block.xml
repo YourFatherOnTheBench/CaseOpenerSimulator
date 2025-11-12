@@ -9,13 +9,16 @@
         android:gravity="center"
         android:layout_width="205.5dp"
         android:layout_height="155dp"
-        android:id="@+id/skin1"
+        android:id="@+id/skin"
         android:padding="10dp"
         android:background="@color/gray"
+
+
         >
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="75dp">
+            android:layout_height="75dp"
+            android:id="@+id/imageSkin">
 
         </ImageView>
         <TextView

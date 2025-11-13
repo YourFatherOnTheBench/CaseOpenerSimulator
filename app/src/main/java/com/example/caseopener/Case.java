@@ -3,19 +3,19 @@ package com.example.caseopener;
 public class Case {
 
     private String name;
-    private String imgPath;
+    private String imgName;
 
     public Case(String name, String imgPath) {
         this.name = name;
-        this.imgPath = imgPath;
+        this.imgName = imgPath;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getImgPath() {
-        return imgPath;
+    public String getImgName() {
+        return imgName;
     }
 
 }

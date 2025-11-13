@@ -1,41 +1,46 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/CaseBlock"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:id="@+id/block"
+    android:layout_columnWeight="1"
+    android:layout_margin="8dp"
+    android:background="@color/darkgray">
 
-    >
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+
         android:gravity="center"
-        android:background="@color/gray">
+        android:orientation="vertical"
+        >
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-                >
+            android:id="@+id/Case_img"/>
 
-        </ImageView>
         <TextView
+            android:id="@+id/CaseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="22sp">
+            android:textSize="14sp" />
 
-        </TextView>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:backgroundTint="@color/darkblue"
             android:text="Otwórz skrzynkę"
-            android:backgroundTint="@color/darkgray">
+            android:textSize="14sp" />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:background="@color/gray"
+            android:paddingTop="10dp">
 
-        </Button>
-
+        </View>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</LinearLayout>

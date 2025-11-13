@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity {
 
         List<Case> cases = new ArrayList<>();
         cases.add(new Case("Ben Case", "case1.png"));
-        cases.add(new Case("Jurson Case", "case1.png"));
+        cases.add(new Case("Jurson Case", "case2.png"));
         cases.add(new Case("Igor Case", "case1.png"));
         cases.add(new Case("Blazej Case", "case1.png"));
-        cases.add(new Case("Michal Case", "case1.png"));
-        cases.add(new Case("Ben Case", "case1.png"));
+        cases.add(new Case("Michal Case", "case2.png"));
+        cases.add(new Case("Ben Case", "case2.png"));
         cases.add(new Case("Ben Case", "case1.png"));
         cases.add(new Case("Ben Case", "case1.png"));
 

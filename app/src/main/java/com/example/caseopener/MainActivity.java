@@ -1,10 +1,13 @@
 package com.example.caseopener;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 
@@ -29,31 +32,48 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GridLayout main_container = findViewById(R.id.block_container);
-        String[] image_names = {"case1.png", "case2.png"};
-
-        List<Case> cases = new ArrayList<>();
-        cases.add(new Case("Ben Case", "case1.png"));
-        cases.add(new Case("Jurson Case", "case2.png"));
-        cases.add(new Case("Igor Case", "case1.png"));
-        cases.add(new Case("Blazej Case", "case1.png"));
-        cases.add(new Case("Michal Case", "case2.png"));
-        cases.add(new Case("Ben Case", "case2.png"));
-        cases.add(new Case("Ben Case", "case1.png"));
-        cases.add(new Case("Ben Case", "case1.png"));
 
 
 
-        LayoutInflater inflater = LayoutInflater.from(this);
-        for (int i = 0; i < cases.toArray().length; i++) {
+        GridLayout main_container = findViewById(R.id.block_container); // glowny block gdzie sa skrzynki
+        LayoutInflater inflater = LayoutInflater.from(this); // do tego dodajesz block z skrzynka
+
+        SkinManager.getInstance().ReadFromJSON(this, "skins_reduced.json"); // utworzenie skinManager
+        // Jesli chcesz wejsc do listy skinow to musisz napisac SkinManager.getInstance().skinList;
+
+
+        CaseManager.getInstance().loadCases(this); // utworzenie caseManager
+        // Jesli chcesz wejsc do listy skrzyn to musisz napisac CaseManager.getInstance().cases;
+
+
+
+        // dodawanie skrzynek do bloku i mozliwosc zmieniania cech tych blockow
+        for (int i = 0; i < CaseManager.getInstance().cases.size(); i++) {
             View caseBlock = inflater.inflate(R.layout.caseblock, main_container, false);
             // caseBlock.setBackgroundColor(ContextCompat.getColor(this, colors[i])); zmienianie koloru
             TextView case_name = caseBlock.findViewById(R.id.CaseName);
             ImageView case_image = caseBlock.findViewById(R.id.Case_img);
+            Button btn = caseBlock.findViewById(R.id.case_btn);
 
-            case_name.setText(cases.get(i).getName());
+            int finalI = i;
+            btn.setOnClickListener(v ->
+                    {
+                        Intent intent = new Intent(MainActivity.this, EQ_page.class);
+                        intent.putExtra("Case_id", CaseManager.getInstance().cases.get(finalI).getId());
+                        startActivity(intent);
+                    }
+            );
 
-            try(InputStream inputStream = getAssets().open(cases.get(i).getImgName())) {
+
+
+
+            case_name.setText(CaseManager.getInstance().cases.get(i).getName());
+
+
+
+
+
+            try(InputStream inputStream = getAssets().open(CaseManager.getInstance().cases.get(i).getImgName())) {
                 Drawable drawable = Drawable.createFromStream(inputStream, null);
                 case_image.setImageDrawable(drawable);
             } catch (IOException e) {

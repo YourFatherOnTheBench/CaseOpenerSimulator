@@ -1,17 +1,22 @@
 package com.example.caseopener;
 // In your Skin.java file
 public class Skin {
-    private String name;
-    private String rarity;
-    private String wear;
-    private String backgroundColor; // Add this field
+    public String id;
+    public String name;
+    public String rarity;
+    public String wear;
+    public boolean stattrak;
+    public String image;
+
 
     // Your existing constructor
-    public Skin(String name, String rarity, String wear) {
+    public Skin( String id, String name, String rarity, String wear, boolean stattrak, String image) {
         this.name = name;
         this.rarity = rarity;
         this.wear = wear;
-        this.backgroundColor = "#808080"; // Default color
+        this.id = id;
+        this.stattrak = stattrak;
+        this.image = image;
     }
 
     // Getters and Setters
@@ -19,6 +24,4 @@ public class Skin {
     public String getRarity() { return rarity; }
     public String getWear() { return wear; }
 
-    public String getBackgroundColor() { return backgroundColor; }
-    public void setBackgroundColor(String color) { this.backgroundColor = color; }
 }

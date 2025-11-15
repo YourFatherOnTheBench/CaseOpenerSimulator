@@ -2,6 +2,7 @@ package com.example.caseopener;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.GridLayout;
 import android.widget.TextView;
@@ -37,7 +38,9 @@ public class CaseOpening extends AppCompatActivity {
 
         for(int i = 0; i < CaseManager.getInstance().cases.get(Case_position).skins.size(); i++)
         {
-            Log.d("Case", "Case data: " + SkinManager.getInstance().skinList.id );
+            String id = CaseManager.getInstance().cases.get(Case_position).skins.get(i);
+
+            Log.d("Case", "Case data: " + Skin.get(id) );
         }
 
 

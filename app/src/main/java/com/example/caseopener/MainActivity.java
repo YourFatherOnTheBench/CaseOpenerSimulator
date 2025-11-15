@@ -38,9 +38,14 @@ public class MainActivity extends AppCompatActivity {
         GridLayout main_container = findViewById(R.id.block_container); // glowny block gdzie sa skrzynki
         LayoutInflater inflater = LayoutInflater.from(this); // do tego dodajesz block z skrzynka
 
-        SkinManager.getInstance().ReadFromJSON(this, "skins_reduced.json"); // utworzenie skinManager
+        SkinManager.getInstance().ReadFromJSON(this, "skins_reduced.json");
+        //for(Skin s : SkinManager.getInstance().skinList)
+         //   Skin.register(s);
+        // utworzenie skinManager
         // Jesli chcesz wejsc do listy skinow to musisz napisac SkinManager.getInstance().skinList;
         // jest 312 skinow
+
+
 
         CaseManager.getInstance().loadCases(this); // utworzenie caseManager
         // Jesli chcesz wejsc do listy skrzyn to musisz napisac CaseManager.getInstance().cases;

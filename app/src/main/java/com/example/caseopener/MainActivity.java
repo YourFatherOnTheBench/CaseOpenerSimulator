@@ -40,10 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
         SkinManager.getInstance().ReadFromJSON(this, "skins_reduced.json"); // utworzenie skinManager
         // Jesli chcesz wejsc do listy skinow to musisz napisac SkinManager.getInstance().skinList;
-
+        // jest 312 skinow
 
         CaseManager.getInstance().loadCases(this); // utworzenie caseManager
         // Jesli chcesz wejsc do listy skrzyn to musisz napisac CaseManager.getInstance().cases;
+
+        Log.d("Number of skins", "There are: " + SkinManager.getInstance().skinList.size() + " number of skins");
+        Log.d("Case Loot", "Here's ids of loot: " + CaseManager.getInstance().cases.get(0).skins);
 
 
 
@@ -58,8 +61,9 @@ public class MainActivity extends AppCompatActivity {
             int finalI = i;
             btn.setOnClickListener(v ->
                     {
-                        Intent intent = new Intent(MainActivity.this, EQ_page.class);
+                        Intent intent = new Intent(MainActivity.this, CaseOpening.class);
                         intent.putExtra("Case_id", CaseManager.getInstance().cases.get(finalI).getId());
+                        intent.putExtra("position", finalI);
                         startActivity(intent);
                     }
             );

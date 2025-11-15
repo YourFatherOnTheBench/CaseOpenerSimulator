@@ -23,5 +23,10 @@ public class Skin {
     public String getName() { return name; }
     public String getRarity() { return rarity; }
     public String getWear() { return wear; }
+    public String getId(){return id;}
+    public Skin GetData(String id)
+    {
+        return Skin.get(id);
+    }
 
 }

@@ -10,12 +10,12 @@ import java.util.ArrayList;
 public class CaseManager {
 
 
-    public String[] CaseNames = {"Ben Case", "Ben Case", "Ben Case", "Ben Case",
-            "Ben Case", "Ben Case", "Ben Case", "Ben Case",
-            "Ben Case", "Ben Case", "Ben Case", "Ben Case"};
-    public String[] CaseImages = {"case1.png", "case1.png", "case1.png", "case1.png",
-            "case1.png", "case1.png", "case1.png", "case1.png",
-            "case1.png", "case1.png", "case1.png", "case1.png",};
+    public String[] CaseNames = {"Dracula Case", "Rich Case", "Gamer Case", "... Case",
+            "Ben Case", "Poland Case", "Drunk Case", "UFO Case",
+            "Streamer Case", "Winter Case", "Cobra Case", "Nerdzik Case"};
+    public String[] CaseImages = {"case1.png", "case2.png", "case3.png", "case4.png",
+            "case12.png", "case6.png", "case7.png", "case8.png",
+            "case9.png", "case10.png", "case11.png", "case5.png",};
     public static CaseManager instance;
 
     public static CaseManager getInstance() {

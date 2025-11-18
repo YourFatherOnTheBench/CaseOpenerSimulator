@@ -6,7 +6,7 @@ import java.util.HashMap;
 // In your Skin.java file
 public class Skin {
 
-    private static HashMap<String, Skin> skins_database = new HashMap<>();
+
 
 
 
@@ -33,15 +33,7 @@ public class Skin {
     public String getRarity() { return rarity; }
     public String getWear() { return wear; }
     public String getId(){return id;}
-    public static void register(Skin skin) {
-        skins_database.put(skin.getId(), skin);
 
-    }
-
-    public static Skin get(String id)
-    {
-        return skins_database.get(id);
-    }
 
 
 

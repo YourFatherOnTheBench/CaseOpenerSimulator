@@ -6,10 +6,14 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 public class SkinManager {
     private static SkinManager instance;
     public ArrayList<Skin> skinList = new ArrayList<>();
 
+
+    public HashMap<String, Skin> skins_database = new HashMap<>();
     public static SkinManager getInstance()
     {
         if(instance == null)
@@ -18,6 +22,16 @@ public class SkinManager {
         }
         return instance;
 
+    }
+
+    public void register(Skin skin) {
+        skins_database.put(skin.getId(), skin);
+
+    }
+
+    public Skin get(String id)
+    {
+        return skins_database.get(id);
     }
 
 
@@ -50,7 +64,9 @@ public class SkinManager {
                         obj.optBoolean("stattrak"),
                         obj.optString("image")
                 );
+                register(skin);
                 skinList.add(skin);
+
 
 
             }

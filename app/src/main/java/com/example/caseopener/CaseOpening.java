@@ -2,6 +2,7 @@ package com.example.caseopener;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,9 @@ import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class CaseOpening extends AppCompatActivity {
 
@@ -38,18 +42,20 @@ public class CaseOpening extends AppCompatActivity {
         ImageView CaseImage = findViewById(R.id.CaseImage);
         TextView CaseName = findViewById(R.id.CaseOpeningName);
 
+        CaseName.setText(CaseManager.getInstance().cases.get(Case_position).getName());
 
+        try (InputStream inputStream = getAssets().open(CaseManager.getInstance().CaseImages[Case_position])) {
+            Drawable drawable = Drawable.createFromStream(inputStream, null);
+            CaseImage.setImageDrawable(drawable);
+        } catch (IOException e) {
 
-
-
+        }
 
         for (int i = 0; i < CaseManager.getInstance().cases.get(Case_position).skins.size(); i++) {
             View Skin_block = Inflater.inflate(R.layout.block, BlockSkin, false);
             String id = CaseManager.getInstance().cases.get(Case_position).skins.get(i);
 
-
             LinearLayout skinBackground = Skin_block.findViewById(R.id.skin);
-
 
             Skin currentSkin = SkinManager.getInstance().skins_database.get(id);
 
@@ -62,7 +68,6 @@ public class CaseOpening extends AppCompatActivity {
                 name.setText(currentSkin.getName());
                 wear.setText(currentSkin.getWear());
                 Glide.with(this).load(currentSkin.getImage()).into(skinImage);
-
 
                 try {
                     JSONObject rarityJson = new JSONObject(currentSkin.getRarity());
@@ -78,7 +83,6 @@ public class CaseOpening extends AppCompatActivity {
             }
 
             BlockSkin.addView(Skin_block);
-
         }
 
         Button back_btn = findViewById(R.id.Back_to_menu_btn);

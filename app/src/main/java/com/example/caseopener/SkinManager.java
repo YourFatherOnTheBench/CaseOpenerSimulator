@@ -24,6 +24,7 @@ public class SkinManager {
 
     }
 
+
     public void register(Skin skin) {
         skins_database.put(skin.getId(), skin);
 

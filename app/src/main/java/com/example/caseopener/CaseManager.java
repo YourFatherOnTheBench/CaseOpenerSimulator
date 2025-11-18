@@ -39,14 +39,13 @@ public class CaseManager {
 
             for(int j = 0; j < 26; j++)
             {
-                skins.add(SkinManager.getInstance().skinList.get(j*12).getId());
+                skins.add(SkinManager.getInstance().skinList.get((i * 26) + j).getId());
             }
             newCase.setSkins(skins);
 
             cases.add(newCase);
         }
     }
-
 
 
 

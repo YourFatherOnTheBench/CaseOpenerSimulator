@@ -55,14 +55,23 @@
             android:background="@color/gray">
             
         </View>
-        <GridLayout
-            android:id="@+id/SkinBlock"
-            android:layout_width="match_parent"
+        <ScrollView
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:columnCount="2">
+            >
 
-        </GridLayout>
+
+            <GridLayout
+                android:id="@+id/SkinBlock"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:columnCount="2"
+                android:orientation="horizontal">
+
+            </GridLayout>
+        </ScrollView>
         <View
             android:layout_width="match_parent"
             android:layout_height="3dp"

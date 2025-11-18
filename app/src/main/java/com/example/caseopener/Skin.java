@@ -30,9 +30,14 @@ public class Skin {
 
     // Getters and Setters
     public String getName() { return name; }
-    public String getRarity() { return rarity; }
+    public String getRarity() {
+        return rarity;
+    }
     public String getWear() { return wear; }
     public String getId(){return id;}
+    public String getImage(){return image;}
+    public boolean getStattrak(){return stattrak;}
+
 
 
 

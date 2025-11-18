@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
             Button btn = caseBlock.findViewById(R.id.case_btn);
 
             int finalI = i;
+            Log.d("Position", "Position: " + finalI);
             btn.setOnClickListener(v ->
                     {
                         Intent intent = new Intent(MainActivity.this, CaseOpening.class);

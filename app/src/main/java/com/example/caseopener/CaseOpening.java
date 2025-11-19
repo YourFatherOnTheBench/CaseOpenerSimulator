@@ -64,11 +64,11 @@ public class CaseOpening extends AppCompatActivity {
             if (currentSkin != null) {
                 TextView name = Skin_block.findViewById(R.id.nameSkin);
                 TextView rarity = Skin_block.findViewById(R.id.raritySkin);
-                TextView wear = Skin_block.findViewById(R.id.wearSkin);
+                TextView price = Skin_block.findViewById(R.id.Price);
                 ImageView skinImage = Skin_block.findViewById(R.id.imageSkin);
 
                 name.setText(currentSkin.getName());
-                wear.setText(currentSkin.getWear());
+                price.setText("9999.99$");
                 Glide.with(this).load(currentSkin.getImage()).into(skinImage);
 
                 try {

@@ -43,10 +43,11 @@ public class MainActivity extends AppCompatActivity {
             // dodawanie skrzynek do bloku i mozliwosc zmieniania cech tych blockow
             for (int i = 0; i < CaseManager.getInstance().cases.size(); i++) {
                 View caseBlock = inflater.inflate(R.layout.caseblock, main_container, false);
-                // caseBlock.setBackgroundColor(ContextCompat.getColor(this, colors[i])); zmienianie koloru
+                caseBlock.setBackgroundColor(Color.parseColor("#0D2338"));
                 TextView case_name = caseBlock.findViewById(R.id.CaseName);
                 ImageView case_image = caseBlock.findViewById(R.id.Case_img);
                 Button btn = caseBlock.findViewById(R.id.case_btn);
+                btn.setBackgroundColor(Color.parseColor("#375876"));
 
                 int finalI = i;
                 Log.d("Position", "Position: " + finalI);

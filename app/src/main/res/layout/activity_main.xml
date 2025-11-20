@@ -33,6 +33,7 @@
                     android:text="EQ"
                     android:backgroundTint="@color/crosowy1"
                     android:textSize="18sp"
+                    android:id="@+id/eq_btn"
 
                     >
 

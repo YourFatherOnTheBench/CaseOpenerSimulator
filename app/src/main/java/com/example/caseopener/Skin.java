@@ -16,16 +16,18 @@ public class Skin {
     public String wear;
     public boolean stattrak;
     public String image;
+    public String price;
 
 
     // Your existing constructor
-    public Skin( String id, String name, String rarity, String wear, boolean stattrak, String image) {
+    public Skin( String id, String name, String rarity, String wear, boolean stattrak, String image, String price) {
         this.name = name;
         this.rarity = rarity;
         this.wear = wear;
         this.id = id;
         this.stattrak = stattrak;
         this.image = image;
+        this.price = price;
     }
 
     // Getters and Setters
@@ -37,6 +39,9 @@ public class Skin {
     public String getId(){return id;}
     public String getImage(){return image;}
     public boolean getStattrak(){return stattrak;}
+    public String getPrice(){return price;}
+
+
 
 
 

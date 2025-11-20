@@ -63,7 +63,8 @@ public class SkinManager {
                         obj.optString("rarity"),
                         ("Factory-new"),
                         obj.optBoolean("stattrak"),
-                        obj.optString("image")
+                        obj.optString("image"),
+                        ("9999")
                 );
                 register(skin);
                 skinList.add(skin);

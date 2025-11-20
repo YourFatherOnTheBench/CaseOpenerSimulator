@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +38,21 @@ public class MainActivity extends AppCompatActivity {
 
         SkinManager.getInstance().ReadFromJSON(this, "skins_reduced.json");
         CaseManager.getInstance().loadCases(this); // utworzenie caseManager
+
+
+        ImageButton eq_btn = findViewById(R.id.eq_btn);
+        eq_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, EQ_page.class);
+            startActivity(intent);
+
+        });
+
+
+
+
+
+
+
 
         // Only add views if the container is empty
         if (main_container.getChildCount() == 0) {

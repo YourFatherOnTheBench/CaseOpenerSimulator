@@ -39,9 +39,4 @@ public class Skin {
     public boolean getStattrak(){return stattrak;}
 
 
-
-
-
-
-
 }

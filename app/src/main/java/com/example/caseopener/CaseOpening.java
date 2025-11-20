@@ -1,5 +1,6 @@
 package com.example.caseopener;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -18,11 +19,14 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 public class CaseOpening extends AppCompatActivity {
@@ -45,6 +49,11 @@ public class CaseOpening extends AppCompatActivity {
         TextView CaseName = findViewById(R.id.CaseOpeningName);
 
         CaseName.setText(CaseManager.getInstance().cases.get(Case_position).getName());
+
+
+
+
+
 
         try (InputStream inputStream = getAssets().open(CaseManager.getInstance().CaseImages[Case_position])) {
             Drawable drawable = Drawable.createFromStream(inputStream, null);
@@ -116,6 +125,7 @@ public class CaseOpening extends AppCompatActivity {
             int SkinID = rand.nextInt(CaseManager.getInstance().cases.get(Case_position).skins.size());
             skin = CaseManager.getInstance().cases.get(Case_position).skins.get(SkinID);
             Skin RandomSkin = SkinManager.getInstance().skins_database.get(skin);
+
             try {
                 JSONObject rarityJson = new JSONObject(RandomSkin.getRarity());
                 String rarityName = rarityJson.getString("name");
@@ -125,11 +135,40 @@ public class CaseOpening extends AppCompatActivity {
                 Skin_Rarity = RandomSkin.getRarity(); // Fallback
                 e.printStackTrace();
             }
-
+            String id = RandomSkin.getId();
+            SaveDataToJSON(this, "data.json", id);
             Log.d("Skin",SkinManager.getInstance().skins_database.get(skin).name);
             Log.d("SkinRarity",SkinManager.getInstance().skins_database.get(skin).rarity);
             Log.d("SkinRaritygetter",Skin_Rarity);
 
         });
+
+    }
+    public void SaveDataToJSON(Context context, String filename, String id)
+    {
+        try {
+            InputStream inputStream = context.getAssets().open(filename);
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            String jsonString = new String(buffer, StandardCharsets.UTF_8);
+            JSONArray arr = new JSONArray(jsonString);
+
+            JSONObject new_id = new JSONObject();
+            new_id.put("id", id);
+
+            arr.put(new_id);
+            Log.d("IDSKIN:", id);
+            Log.d("ARRAY", arr.toString());
+            FileOutputStream file = openFileOutput(filename, MODE_PRIVATE);
+            file.write(arr.toString(4).getBytes());
+            file.close();
+
+
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

@@ -98,7 +98,6 @@ public class CaseOpening extends AppCompatActivity {
         OpenCasebtn = findViewById(R.id.OpenCase);
 
         OpenCasebtn.setOnClickListener(v -> {
-
             String skin = RandomSkin_Generator(Case_position);
             Intent OpenedCaseLoot = new Intent(CaseOpening.this, OpenedCaseLoot.class);
             OpenedCaseLoot.putExtra("SkinID", skin);

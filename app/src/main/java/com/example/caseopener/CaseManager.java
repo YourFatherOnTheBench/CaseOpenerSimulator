@@ -30,20 +30,21 @@ public class CaseManager {
 
     public void loadCases(Context context)
     {
-
-        for(int i = 0; i < 12; i++)
-        {
-            Integer id = i+1;
-            Case newCase = new Case(id.toString(), CaseNames[i], CaseImages[i]);
-            ArrayList<String> skins = new ArrayList<>();
-
-            for(int j = 0; j < 26; j++)
+        if (cases.isEmpty()) {
+            for(int i = 0; i < 12; i++)
             {
-                skins.add(SkinManager.getInstance().skinList.get((i * 26) + j).getId());
-            }
-            newCase.setSkins(skins);
+                Integer id = i+1;
+                Case newCase = new Case(id.toString(), CaseNames[i], CaseImages[i]);
+                ArrayList<String> skins = new ArrayList<>();
 
-            cases.add(newCase);
+                for(int j = 0; j < 26; j++)
+                {
+                    skins.add(SkinManager.getInstance().skinList.get((i * 26) + j).getId());
+                }
+                newCase.setSkins(skins);
+
+                cases.add(newCase);
+            }
         }
     }
 

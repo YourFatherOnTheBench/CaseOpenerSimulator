@@ -1,6 +1,5 @@
 package com.example.caseopener;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -19,14 +18,11 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 public class CaseOpening extends AppCompatActivity {
@@ -49,11 +45,6 @@ public class CaseOpening extends AppCompatActivity {
         TextView CaseName = findViewById(R.id.CaseOpeningName);
 
         CaseName.setText(CaseManager.getInstance().cases.get(Case_position).getName());
-
-
-
-
-
 
         try (InputStream inputStream = getAssets().open(CaseManager.getInstance().CaseImages[Case_position])) {
             Drawable drawable = Drawable.createFromStream(inputStream, null);
@@ -107,68 +98,46 @@ public class CaseOpening extends AppCompatActivity {
         OpenCasebtn = findViewById(R.id.OpenCase);
 
         OpenCasebtn.setOnClickListener(v -> {
-            Random rand = new Random();
-
-            String Skin_Rarity = "";
-            String rarity = "";
-            double rarityROLL = Math.random() * 100;
-            if(rarityROLL < 80.0){
-                rarity = "Consumer Grade";
-            } else if(rarityROLL < 96.0){
-                rarity = "Restricted";
-            } else if(rarityROLL < 99.0){
-                rarity = "Classified";
-            } else if(rarityROLL < 99.7){
-                rarity = "Classified";
-            }
-            String skin = "";
-            int SkinID = rand.nextInt(CaseManager.getInstance().cases.get(Case_position).skins.size());
-            skin = CaseManager.getInstance().cases.get(Case_position).skins.get(SkinID);
-            Skin RandomSkin = SkinManager.getInstance().skins_database.get(skin);
-
-            try {
-                JSONObject rarityJson = new JSONObject(RandomSkin.getRarity());
-                String rarityName = rarityJson.getString("name");
-
-                Skin_Rarity = rarityName;
-            } catch (JSONException e) {
-                Skin_Rarity = RandomSkin.getRarity(); // Fallback
-                e.printStackTrace();
-            }
-            String id = RandomSkin.getId();
-            SaveDataToJSON(this, "data.json", id);
-            Log.d("Skin",SkinManager.getInstance().skins_database.get(skin).name);
-            Log.d("SkinRarity",SkinManager.getInstance().skins_database.get(skin).rarity);
-            Log.d("SkinRaritygetter",Skin_Rarity);
-
+            String skin = RandomSkin_Generator(Case_position);
+            Intent OpenedCaseLoot = new Intent(CaseOpening.this, OpenedCaseLoot.class);
+            OpenedCaseLoot.putExtra("SkinID", skin);
+            OpenedCaseLoot.putExtra("CaseID", Case_position);
+            startActivity(OpenedCaseLoot);
         });
-
     }
-    public void SaveDataToJSON(Context context, String filename, String id)
+    static String RandomSkin_Generator(int Case_position)
     {
+        Random rand = new Random();
+
+        String Skin_Rarity = "";
+        String rarity = "";
+        double rarityROLL = Math.random() * 100;
+        if(rarityROLL < 80.0){
+            rarity = "Consumer Grade";
+        } else if(rarityROLL < 96.0){
+            rarity = "Restricted";
+        } else if(rarityROLL < 99.0){
+            rarity = "Classified";
+        } else if(rarityROLL < 99.7){
+            rarity = "Classified";
+        }
+        String skin = "";
+        int SkinID = rand.nextInt(CaseManager.getInstance().cases.get(Case_position).skins.size());
+        skin = CaseManager.getInstance().cases.get(Case_position).skins.get(SkinID);
+        Skin RandomSkin = SkinManager.getInstance().skins_database.get(skin);
         try {
-            InputStream inputStream = context.getAssets().open(filename);
-            byte[] buffer = new byte[inputStream.available()];
-            inputStream.read(buffer);
-            String jsonString = new String(buffer, StandardCharsets.UTF_8);
-            JSONArray arr = new JSONArray(jsonString);
+            JSONObject rarityJson = new JSONObject(RandomSkin.getRarity());
+            String rarityName = rarityJson.getString("name");
 
-            JSONObject new_id = new JSONObject();
-            new_id.put("id", id);
-
-            arr.put(new_id);
-            Log.d("IDSKIN:", id);
-            Log.d("ARRAY", arr.toString());
-            FileOutputStream file = openFileOutput(filename, MODE_PRIVATE);
-            file.write(arr.toString(4).getBytes());
-            file.close();
-
-
-
-        } catch (IOException | JSONException e) {
+            Skin_Rarity = rarityName;
+        } catch (JSONException e) {
+            Skin_Rarity = RandomSkin.getRarity(); // Fallback
             e.printStackTrace();
         }
 
-
+        Log.d("Skin",SkinManager.getInstance().skins_database.get(skin).name);
+        Log.d("SkinRarity",SkinManager.getInstance().skins_database.get(skin).rarity);
+        Log.d("SkinRaritygetter",Skin_Rarity);
+        return skin;
     }
 }

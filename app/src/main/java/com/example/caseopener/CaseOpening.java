@@ -1,5 +1,6 @@
 package com.example.caseopener;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -18,11 +19,14 @@ import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Random;
 
 public class CaseOpening extends AppCompatActivity {
@@ -104,6 +108,33 @@ public class CaseOpening extends AppCompatActivity {
             OpenedCaseLoot.putExtra("CaseID", Case_position);
             startActivity(OpenedCaseLoot);
         });
+    }
+    public void SaveDataToJSON(Context context, String filename, String id)
+    {
+        try {
+            InputStream inputStream = context.getAssets().open(filename);
+            byte[] buffer = new byte[inputStream.available()];
+            inputStream.read(buffer);
+            String jsonString = new String(buffer, StandardCharsets.UTF_8);
+            JSONArray arr = new JSONArray(jsonString);
+
+            JSONObject new_id = new JSONObject();
+            new_id.put("id", id);
+
+            arr.put(new_id);
+            Log.d("IDSKIN:", id);
+            Log.d("ARRAY", arr.toString());
+            FileOutputStream file = openFileOutput(filename, MODE_PRIVATE);
+            file.write(arr.toString(4).getBytes());
+            file.close();
+
+
+
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
+
+
     }
     static String RandomSkin_Generator(int Case_position)
     {

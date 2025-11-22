@@ -1,7 +1,10 @@
 package com.example.caseopener;
 
 import android.content.Context;
+import android.graphics.Color;
+
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -56,6 +59,45 @@ public class SkinManager {
             for(int i = 0; i < arr.length(); i++)
             {
                 JSONObject obj = arr.getJSONObject(i);
+
+                String Rarity = obj.optString("rarity");
+                try {
+                JSONObject rarityJson = new JSONObject(Rarity);
+                String rarityName = rarityJson.getString("name");
+                String price;
+                if(rarityName == "Classified"){
+
+                }
+                else if(rarityName == "Extraodrinary")
+                {
+
+                }
+                else if(rarityName == "Covert")
+                {
+
+                }
+                else if(rarityName == "Mil-Spec Grade")
+                {
+
+                }
+                else if(rarityName == "Consumer Grade")
+                {
+
+                }
+                else if (rarityName == "Industrial Grade")
+                {
+
+                }
+
+
+
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+
+
 
                 Skin skin = new Skin(
                         obj.optString("id"),

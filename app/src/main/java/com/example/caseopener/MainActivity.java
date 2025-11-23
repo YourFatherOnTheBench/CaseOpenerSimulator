@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
 
         SkinManager.getInstance().ReadFromJSON(this, "skins_final.json");
         CaseManager.getInstance().loadCases(this); // utworzenie caseManager
+        EqManager.getInstance().loadSkins(this);
+
+        Button Deposit = findViewById(R.id.CurrentDeposit);
+        Deposit.setText(EqManager.getInstance().GetMoenyString(this));
+
 
 
         ImageButton eq_btn = findViewById(R.id.eq_btn);

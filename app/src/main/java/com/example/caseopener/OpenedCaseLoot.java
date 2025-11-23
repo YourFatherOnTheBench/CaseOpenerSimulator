@@ -58,7 +58,7 @@ public class OpenedCaseLoot extends AppCompatActivity {
 
         Open = findViewById(R.id.OpenNext);
         Open.setOnClickListener(v -> {
-            String NewSkinID = CaseOpening.RandomSkin_Generator(Case_ID);
+            String NewSkinID = SkinManager.RandomSkin_Generator(Case_ID);
             SetDroppedSkin(NewSkinID);
         });
 
@@ -82,6 +82,8 @@ public class OpenedCaseLoot extends AppCompatActivity {
         LinearLayout skinBackground = skinBlock.findViewById(R.id.skin);
 
         Skin currentSkin = SkinManager.getInstance().skins_database.get(SkinID);
+        String id = currentSkin.getId();
+        EqManager.getInstance().addSkin(this, id);
 
         if (currentSkin != null) {
             TextView name = skinBlock.findViewById(R.id.nameSkin);
@@ -90,7 +92,7 @@ public class OpenedCaseLoot extends AppCompatActivity {
             ImageView skinImage = skinBlock.findViewById(R.id.imageSkin);
 
             name.setText(currentSkin.getName());
-            price.setText("9999.99$");
+            price.setText(currentSkin.getPrice() + "$");
             Glide.with(this).load(currentSkin.getImage()).into(skinImage);
 
             try {

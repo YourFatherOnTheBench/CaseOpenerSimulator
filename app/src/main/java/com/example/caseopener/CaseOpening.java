@@ -102,73 +102,39 @@ public class CaseOpening extends AppCompatActivity {
         OpenCasebtn = findViewById(R.id.OpenCase);
 
         OpenCasebtn.setOnClickListener(v -> {
-            String skin = RandomSkin_Generator(Case_position);
+            String skin = SkinManager.RandomSkin_Generator(Case_position);
             Intent OpenedCaseLoot = new Intent(CaseOpening.this, OpenedCaseLoot.class);
             OpenedCaseLoot.putExtra("SkinID", skin);
             OpenedCaseLoot.putExtra("CaseID", Case_position);
             startActivity(OpenedCaseLoot);
         });
     }
-    public void SaveDataToJSON(Context context, String filename, String id)
-    {
-        try {
-            InputStream inputStream = context.getAssets().open(filename);
-            byte[] buffer = new byte[inputStream.available()];
-            inputStream.read(buffer);
-            String jsonString = new String(buffer, StandardCharsets.UTF_8);
-            JSONArray arr = new JSONArray(jsonString);
+//    public void SaveDataToJSON(Context context, String filename, String id)
+//    {
+//        try {
+//            InputStream inputStream = context.getAssets().open(filename);
+//            byte[] buffer = new byte[inputStream.available()];
+//            inputStream.read(buffer);
+//            String jsonString = new String(buffer, StandardCharsets.UTF_8);
+//            JSONArray arr = new JSONArray(jsonString);
+//
+//            JSONObject new_id = new JSONObject();
+//            new_id.put("id", id);
+//
+//            arr.put(new_id);
+//            Log.d("IDSKIN:", id);
+//            Log.d("ARRAY", arr.toString());
+//            FileOutputStream file = openFileOutput(filename, MODE_PRIVATE);
+//            file.write(arr.toString(4).getBytes());
+//            file.close();
+//
+//
+//
+//        } catch (IOException | JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
 
-            JSONObject new_id = new JSONObject();
-            new_id.put("id", id);
-
-            arr.put(new_id);
-            Log.d("IDSKIN:", id);
-            Log.d("ARRAY", arr.toString());
-            FileOutputStream file = openFileOutput(filename, MODE_PRIVATE);
-            file.write(arr.toString(4).getBytes());
-            file.close();
-
-
-
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-    static String RandomSkin_Generator(int Case_position)
-    {
-        Random rand = new Random();
-
-        String Skin_Rarity = "";
-        String rarity = "";
-        double rarityROLL = Math.random() * 100;
-        if(rarityROLL < 80.0){
-            rarity = "Consumer Grade";
-        } else if(rarityROLL < 96.0){
-            rarity = "Restricted";
-        } else if(rarityROLL < 99.0){
-            rarity = "Classified";
-        } else if(rarityROLL < 99.7){
-            rarity = "Classified";
-        }
-        String skin = "";
-        int SkinID = rand.nextInt(CaseManager.getInstance().cases.get(Case_position).skins.size());
-        skin = CaseManager.getInstance().cases.get(Case_position).skins.get(SkinID);
-        Skin RandomSkin = SkinManager.getInstance().skins_database.get(skin);
-        try {
-            JSONObject rarityJson = new JSONObject(RandomSkin.getRarity());
-            String rarityName = rarityJson.getString("name");
-
-            Skin_Rarity = rarityName;
-        } catch (JSONException e) {
-            Skin_Rarity = RandomSkin.getRarity(); // Fallback
-            e.printStackTrace();
-        }
-
-        Log.d("Skin",SkinManager.getInstance().skins_database.get(skin).name);
-        Log.d("SkinRarity",SkinManager.getInstance().skins_database.get(skin).rarity);
-        Log.d("SkinRaritygetter",Skin_Rarity);
-        return skin;
-    }
 }

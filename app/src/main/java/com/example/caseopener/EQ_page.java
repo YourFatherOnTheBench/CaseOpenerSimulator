@@ -46,18 +46,25 @@ public class EQ_page extends AppCompatActivity {
         LayoutInflater inflater = LayoutInflater.from(this);
 
 
+        Button Deposit = findViewById(R.id.CurrentDeposit);
+        Deposit.setText(EqManager.getInstance().GetMoenyString(this));
+
+        Log.d("EQ", EqManager.getInstance().acquiredSkins.toString());
+
+
+
         Button menuButton = findViewById(R.id.Back_to_menu_btn);
 
-        GetDataFromJSON(this, "data.json");
 
-        for(int i = 0; i < Eq_list.size(); i++) {
 
-            Log.d("EQ",Eq_list.get(i));
+        for(int i = 0; i < EqManager.getInstance().acquiredSkins.size(); i++) {
+
+            Log.d("EQ",EqManager.getInstance().acquiredSkins.get(i));
 
 
 
             View Skin_block = inflater.inflate(R.layout.block, gridLayout, false );
-            String id = Eq_list.get(i);
+            String id = EqManager.getInstance().acquiredSkins.get(i);
             Skin currentSkin = SkinManager.getInstance().skins_database.get(id);
 
             Log.d("CURRENT SKIN", currentSkin.toString());
@@ -112,36 +119,9 @@ public class EQ_page extends AppCompatActivity {
     }
 
 
-    public void GetDataFromJSON(Context context, String filename)
-    {
-        try{
-            InputStream inputStream = context.getAssets().open(filename);
-            int size = inputStream.available();
-            byte[] buffer = new byte[size];
-            inputStream.read(buffer);
-            inputStream.close();
-            String json = new String(buffer, StandardCharsets.UTF_8);
-            JSONArray arr = new JSONArray(json);
-            Eq_list.clear();
-            for(int i = 0; i < arr.length(); i++)
-            {
-                JSONObject obj = arr.getJSONObject(i);
-                Eq_list.add(obj.optString("id"));
 
 
 
 
 
-            }
-
-
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 }

@@ -47,10 +47,12 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:layout_width="125dp"
+                    android:id="@+id/CurrentDeposit"
+                    android:layout_width="wrap_content"
                     android:layout_height="75dp"
                     android:layout_marginStart="25dp"
-                    android:text="$0.00"
+                    android:text="0.00$"
+
                     android:backgroundTint="#375876"
                     android:textColor="@color/white"
                     android:textSize="18sp"

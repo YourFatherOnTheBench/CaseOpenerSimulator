@@ -10,6 +10,9 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.Random;
+import java.util.Locale;
 
 public class SkinManager {
     private static SkinManager instance;
@@ -56,70 +59,46 @@ public class SkinManager {
 
             skinList.clear();
 
-            for(int i = 0; i < arr.length(); i++)
-            {
+
+
+
+            Random random = new Random();
+
+            for(int i = 0; i < arr.length(); i++) {
                 JSONObject obj = arr.getJSONObject(i);
 
-                String Rarity = obj.optString("rarity");
-                try {
-                JSONObject rarityJson = new JSONObject(Rarity);
-                String rarityName = rarityJson.getString("name");
-                String price;
-                if(rarityName == "Classified"){
-
-                }
-                else if(rarityName == "Extraodrinary")
-                {
-
-                }
-                else if(rarityName == "Covert")
-                {
-
-                }
-                else if(rarityName == "Mil-Spec Grade")
-                {
-
-                }
-                else if(rarityName == "Consumer Grade")
-                {
-
-                }
-                else if (rarityName == "Industrial Grade")
-                {
-
-                }
 
 
 
 
-                } catch (JSONException e) {
-
-                    e.printStackTrace();
-                }
-
-
-
+                // Tworzenie skina z wyliczoną ceną
                 Skin skin = new Skin(
                         obj.optString("id"),
                         obj.optString("name"),
                         obj.optString("rarity"),
-                        ("Factory-new"),
+                        "Factory New",
                         obj.optBoolean("stattrak"),
                         obj.optString("image"),
-                        ("9999")
+                        obj.optString("price")
                 );
+
                 register(skin);
                 skinList.add(skin);
-
-
-
             }
+
+
+
+
             System.out.println("Loaded " + skinList.size() + " skins");
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
+
+
 
     }
 

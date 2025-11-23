@@ -72,7 +72,7 @@ public class CaseOpening extends AppCompatActivity {
                 ImageView skinImage = Skin_block.findViewById(R.id.imageSkin);
 
                 name.setText(currentSkin.getName());
-                price.setText(currentSkin.getPrice());
+                price.setText(currentSkin.getPrice() + "$");
                 Glide.with(this).load(currentSkin.getImage()).into(skinImage);
 
                 try {

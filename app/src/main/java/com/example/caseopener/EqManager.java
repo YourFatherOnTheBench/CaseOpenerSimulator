@@ -85,7 +85,7 @@ public class EqManager {
         saveSkins(context);
     }
 
-    public Double GetMoenyInt(Context context)
+    public Double GetMoneyInt(Context context)
     {
         Double SumOfPrices = 0.0;
         for(int i = 0; i < acquiredSkins.size(); i++)
@@ -101,7 +101,7 @@ public class EqManager {
         }
         return SumOfPrices;
     }
-    public String GetMoenyString(Context context)
+    public String GetMoneyString(Context context)
     {
         Double SumOfPrices = 0.0;
         for(int i = 0; i < acquiredSkins.size(); i++)
@@ -115,7 +115,7 @@ public class EqManager {
 
 
         }
-        return String.format("%.2f$", SumOfPrices);
+        return String.format("$%.2f", SumOfPrices);
 
     }
     public void removeSkin(Context context, String skinId) {

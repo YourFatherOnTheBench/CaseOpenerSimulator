@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         EqManager.getInstance().loadSkins(this);
 
         Button Deposit = findViewById(R.id.CurrentDeposit);
-        Deposit.setText(EqManager.getInstance().GetMoenyString(this));
+        Deposit.setText(EqManager.getInstance().GetMoneyString(this));
 
 
 

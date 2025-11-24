@@ -43,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Otwórz skrzynkę"
+                android:backgroundTint="#375876"
                 android:textSize="18sp"
                 android:textAlignment="center"
                 >
@@ -88,6 +89,7 @@
             android:gravity="center"
             android:padding="15dp">
             <Button
+                android:backgroundTint="#375876"
                 android:id="@+id/Back_to_menu_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

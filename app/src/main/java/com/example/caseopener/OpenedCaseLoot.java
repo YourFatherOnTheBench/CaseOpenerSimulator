@@ -53,7 +53,7 @@ public class OpenedCaseLoot extends AppCompatActivity {
 
         Eq = findViewById(R.id.EQ);
         Eq.setOnClickListener(v -> {
-            Intent intentHere = new Intent(OpenedCaseLoot.this, CaseOpening.class);
+            Intent intentHere = new Intent(OpenedCaseLoot.this, EQ_page.class);
             startActivity(intentHere);
         });
 

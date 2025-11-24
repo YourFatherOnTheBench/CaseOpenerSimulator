@@ -52,33 +52,40 @@ public class SkinManager {
         String Skin_Rarity = "";
         String rarity = "";
         double rarityROLL = Math.random() * 100;
-        if(rarityROLL < 80.0){
+        if(rarityROLL < 60.0) {
             rarity = "Consumer Grade";
+        } else if(rarityROLL < 80) {
+            rarity = "Mil-Spec Grade";
         } else if(rarityROLL < 96.0){
             rarity = "Restricted";
         } else if(rarityROLL < 99.0){
             rarity = "Classified";
         } else if(rarityROLL < 99.7){
-            rarity = "Classified";
+            rarity = "Covert";
+        } else {
+            rarity = "Extraordinary";
         }
         String skin = "";
-        int SkinID = rand.nextInt(CaseManager.getInstance().cases.get(Case_position).skins.size());
-        skin = CaseManager.getInstance().cases.get(Case_position).skins.get(SkinID);
-        Skin RandomSkin = SkinManager.getInstance().skins_database.get(skin);
-        try {
-            JSONObject rarityJson = new JSONObject(RandomSkin.getRarity());
-            String rarityName = rarityJson.getString("name");
+        do {
+            int SkinID = rand.nextInt(CaseManager.getInstance().cases.get(Case_position).skins.size());
+            skin = CaseManager.getInstance().cases.get(Case_position).skins.get(SkinID);
+            Skin RandomSkin = SkinManager.getInstance().skins_database.get(skin);
+            try {
+                JSONObject rarityJson = new JSONObject(RandomSkin.getRarity());
+                String rarityName = rarityJson.getString("name");
 
-            Skin_Rarity = rarityName;
-        } catch (JSONException e) {
-            Skin_Rarity = RandomSkin.getRarity(); // Fallback
-            e.printStackTrace();
-        }
+                Skin_Rarity = rarityName;
+            } catch (JSONException e) {
+                Skin_Rarity = RandomSkin.getRarity(); // Fallback
+                e.printStackTrace();
+            }
 
-        Log.d("Skin",SkinManager.getInstance().skins_database.get(skin).name);
-        Log.d("SkinRarity",SkinManager.getInstance().skins_database.get(skin).rarity);
-        Log.d("SkinRaritygetter",Skin_Rarity);
-        return skin;
+            Log.d("Skin",SkinManager.getInstance().skins_database.get(skin).name);
+            Log.d("SkinRarity",SkinManager.getInstance().skins_database.get(skin).rarity);
+            Log.d("SkinRaritygetter",Skin_Rarity);
+            Log.d("Rolled rarity",rarity);
+        } while (!rarity.equals(Skin_Rarity));
+                return skin;
     }
     public void ReadFromJSON(Context context, String filename)
     {

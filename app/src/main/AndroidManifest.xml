@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CaseOpener">
         <activity
+            android:name=".Contract"
+            android:exported="false" />
+        <activity
             android:name=".OpenedCaseLoot"
             android:exported="false" />
         <activity

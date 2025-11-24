@@ -46,6 +46,7 @@ public class OpenedCaseLoot extends AppCompatActivity {
 
         Sell = findViewById(R.id.Sell);
         Sell.setOnClickListener(v -> {
+            EqManager.getInstance().removeSkin(this, SkinID);
             Intent intentHere = new Intent(OpenedCaseLoot.this, CaseOpening.class);
             startActivity(intentHere);
         });

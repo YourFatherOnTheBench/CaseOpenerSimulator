@@ -118,6 +118,14 @@ public class EqManager {
         return String.format("%.2f$", SumOfPrices);
 
     }
+    public void removeSkin(Context context, String skinId) {
+        acquiredSkins.remove(skinId);
+        saveSkins(context);
+    }
+
+
+
+
 
 
 }

@@ -47,7 +47,7 @@ public class EQ_page extends AppCompatActivity {
 
 
         Button Deposit = findViewById(R.id.CurrentDeposit);
-        Deposit.setText(EqManager.getInstance().GetMoenyString(this));
+        Deposit.setText(EqManager.getInstance().GetMoneyString(this));
 
         Log.d("EQ", EqManager.getInstance().acquiredSkins.toString());
 

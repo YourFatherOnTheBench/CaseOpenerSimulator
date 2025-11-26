@@ -107,11 +107,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                android:text="Menu"
-
-                >
-
-            </Button>
+                android:text="Menu" />
 
         </LinearLayout>
 

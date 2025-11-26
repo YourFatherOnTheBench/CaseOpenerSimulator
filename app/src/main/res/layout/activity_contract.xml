@@ -5,6 +5,120 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Contract">
+    tools:context=".Contract"
+    android:background="@color/crosowy1">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            >
+
+            <LinearLayout
+                android:layout_width="205.5dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:src="@drawable/eqicon"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    android:layout_marginEnd="25dp"
+                    android:text="EQ"
+                    android:backgroundTint="@color/crosowy1"
+                    android:textSize="18sp"
+
+                    >
+
+                </ImageButton>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="205.5dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/CurrentDeposit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:layout_marginStart="25dp"
+                    android:text="$0.00"
+                    android:backgroundTint="#375876"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    >
+
+                </Button>
+
+
+            </LinearLayout>
+
+
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray">
+
+        </View>
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+
+
+            <GridLayout
+                android:id="@+id/SkinBlockEQ"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+
+                android:columnCount="2"
+                android:orientation="horizontal">
+
+            </GridLayout>
+        </ScrollView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/gray">
+
+        </View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="15dp">
+            <Button
+                android:id="@+id/Back_to_menu_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:text="Menu" />
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

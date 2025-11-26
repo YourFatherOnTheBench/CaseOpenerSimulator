@@ -16,7 +16,7 @@ public class EqManager {
     private static EqManager instance;
     private static final String FILENAME = "data.json";
 
-    // I corrected the typo: 'AcuairedSkins' -> 'acquiredSkins'
+
     public ArrayList<String> acquiredSkins = new ArrayList<>();
 
     public static EqManager getInstance() {

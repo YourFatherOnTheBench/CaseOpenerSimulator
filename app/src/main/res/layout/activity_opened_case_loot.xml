@@ -5,7 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpenedCaseLoot">
+    tools:context=".OpenedCaseLoot"
+    android:background="@color/crosowy1">
+
 
 
     <LinearLayout
@@ -38,12 +40,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <Button
+                    android:backgroundTint="#375876"
                     android:id="@+id/Sell"
                     android:text="Sell"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"/>
                 <Button
+                    android:backgroundTint="#375876"
                     android:id="@+id/OpenNext"
                     android:text="Open next"
                     android:layout_width="match_parent"
@@ -57,12 +61,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <Button
+                    android:backgroundTint="#375876"
                     android:id="@+id/EQ"
                     android:text="EQ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"/>
                 <Button
+                    android:backgroundTint="#375876"
                     android:id="@+id/MainMenu"
                     android:text="Main Menu"
                     android:layout_width="match_parent"

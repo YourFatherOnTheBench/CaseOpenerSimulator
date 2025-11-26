@@ -108,6 +108,12 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:text="Menu" />
+                android:backgroundTint="#375876"
+                android:text="Menu"
+
+                
+
+            </Button>
 
         </LinearLayout>
 

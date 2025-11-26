@@ -39,9 +39,13 @@ public class MainActivity extends AppCompatActivity {
         SkinManager.getInstance().ReadFromJSON(this, "skins_final.json");
         CaseManager.getInstance().loadCases(this); // utworzenie caseManager
         EqManager.getInstance().loadSkins(this);
+        Balance.getInstance().loadDeposit(this);
+
+        Log.d("PRICE", Balance.getInstance().GetDepositString());
+
 
         Button Deposit = findViewById(R.id.CurrentDeposit);
-        Deposit.setText(EqManager.getInstance().GetMoneyString(this));
+        Deposit.setText(Balance.getInstance().GetDepositString());
 
 
 
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent = new Intent(MainActivity.this, CaseOpening.class);
                             intent.putExtra("Case_id", CaseManager.getInstance().cases.get(finalI).getId());
                             intent.putExtra("position", finalI);
+
                             startActivity(intent);
                         }
                 );

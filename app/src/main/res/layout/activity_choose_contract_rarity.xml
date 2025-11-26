@@ -72,23 +72,80 @@
             android:background="@color/gray">
 
         </View>
-        <ScrollView
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             >
 
-
-            <GridLayout
-                android:id="@+id/SkinBlockEQ"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+                <LinearLayout
+                    android:layout_width="205.5dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <!--niebieski-->
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@color/black"/>
+                </LinearLayout>
 
-                android:columnCount="2"
-                android:orientation="horizontal">
-
-            </GridLayout>
-        </ScrollView>
+                <LinearLayout
+                    android:layout_width="205.5dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <!--fioletowy-->
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@color/black"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="205.5dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <!--rozowy-->
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@color/black"/>
+                </LinearLayout>
+                <!--czerwony-->
+                <LinearLayout
+                    android:layout_width="205.5dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@color/black"/>
+                </LinearLayout>
+            </LinearLayout>
+            <!--zloty-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                >
+                <View
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@color/black"/>
+            </LinearLayout>
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"

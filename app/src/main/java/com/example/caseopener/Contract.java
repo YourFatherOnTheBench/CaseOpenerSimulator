@@ -10,10 +10,12 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
+import androidx.core.graphics.ShaderKt;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.ViewKt;
 import androidx.core.view.WindowInsetsCompat;
@@ -28,7 +30,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Contract extends AppCompatActivity {
-
+    //MAPA SKINOW W KONTRAKCIE
+    Map<Integer, String> Skins_in_Contract = new HashMap<>();
+    Toast cur_toast;
 
     ArrayList<String> Eq_list = new ArrayList<>();
     @Override
@@ -102,14 +106,54 @@ public class Contract extends AppCompatActivity {
 
             //Klikiecie na skiny dodaje je do kontraktu
             Skin_block.setId(i);
-            Map<Integer, String> Skins_in_Contract = new HashMap<>();
+
             Skin_block.setOnClickListener(v -> {
-                skinBackground.setBackgroundColor(Color.parseColor("#07f01e"));
-                int SkinID = Skin_block.getId();
-                String ID = String.valueOf(SkinID);
-                EqManager.getInstance().acquiredSkins.get(SkinID);
-                Log.d("SkinID",currentSkin.toString());
-                Log.d("BLOCKID",ID );
+
+
+                int SkinPlaceInEq = Skin_block.getId();
+                if(!(Skins_in_Contract.containsKey(SkinPlaceInEq)) && Skins_in_Contract.size() < 10)
+                {
+
+                    Skins_in_Contract.put(SkinPlaceInEq, EqManager.getInstance().acquiredSkins.get(SkinPlaceInEq));
+                    Log.d("Info o skinie","dodano skina, Ilosc skinow : " + Skins_in_Contract.size());
+                    if(cur_toast != null){
+                        cur_toast.cancel();
+                    }
+                    cur_toast = Toast.makeText(this, "Skin dodany do kontraktu(" + Skins_in_Contract.size() + " / 10)", Toast.LENGTH_SHORT);
+                    cur_toast.show();
+                    //animacja zaznaczenia
+                    Skin_block.animate()
+                            .scaleX(0.95f)
+                            .scaleY(0.95f)
+                            .setDuration(200)
+                            .start();
+                }
+                else if (Skins_in_Contract.containsKey(SkinPlaceInEq))
+                {
+                    Skins_in_Contract.remove(SkinPlaceInEq);
+                    Log.d("Info o skinie","Juz byl ten skin");
+                    if(cur_toast != null){
+                        cur_toast.cancel();
+                    }
+                    cur_toast = Toast.makeText(this, "Skin usuniety z kontraktu(" + Skins_in_Contract.size() + " / 10)", Toast.LENGTH_SHORT);
+                    cur_toast.show();
+                    //animacja odznaczenia
+                    Skin_block.animate()
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .setDuration(200)
+                            .start();
+
+                }
+                else if (Skins_in_Contract.size() == 10){
+                    if(cur_toast != null){
+                        cur_toast.cancel();
+                    }
+                    cur_toast = Toast.makeText(this, "Kontrakt gotowy (" + Skins_in_Contract.size() + " / 10)", Toast.LENGTH_SHORT);
+                    cur_toast.show();
+                }
+
+
             });
 
 
@@ -126,7 +170,7 @@ public class Contract extends AppCompatActivity {
             finish();
         });
     }
-    public void AddSkin_ToCotract(View SkinBlock)
+    public void Chose_Skin_Rarity(String rarity)
     {
 
     }

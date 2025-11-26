@@ -31,9 +31,7 @@
                     android:layout_marginEnd="25dp"
                     android:text="EQ"
                     android:backgroundTint="@color/crosowy1"
-                    android:textSize="18sp"
-
-                    >
+                    android:textSize="18sp">
 
                 </ImageButton>
             </LinearLayout>
@@ -107,13 +105,12 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textSize="18sp"
-                android:text="Menu" />
                 android:backgroundTint="#375876"
-                android:text="Menu"
+                android:text="Menu"/>
 
-                
 
-            </Button>
+
+
 
         </LinearLayout>
 

@@ -96,7 +96,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:gravity="center"
             android:padding="15dp">
             <Button
@@ -106,8 +106,20 @@
                 android:textAlignment="center"
                 android:textSize="18sp"
                 android:backgroundTint="#375876"
-                android:text="Menu"/>
+                android:text="Menu"
+                android:layout_marginEnd="20dp"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/SellSkins_btn"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:text="Sell"
+                android:backgroundTint="#375876"
+                android:layout_marginStart="20dp"
+                >
 
+            </Button>
 
 
 

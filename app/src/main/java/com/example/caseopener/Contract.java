@@ -38,20 +38,16 @@ public class Contract extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_contract);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
 
         GridLayout gridLayout = findViewById(R.id.SkinBlockEQ);
         LayoutInflater inflater = LayoutInflater.from(this);
 
 
         Button Deposit = findViewById(R.id.CurrentDeposit);
-        Deposit.setText(EqManager.getInstance().GetMoneyString(this));
+        Deposit.setText(Balance.getInstance().GetDepositString());
 
         Log.d("EQ", EqManager.getInstance().acquiredSkins.toString());
 

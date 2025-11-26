@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         EqManager.getInstance().loadSkins(this);
         Balance.getInstance().loadDeposit(this);
 
+
+
         Log.d("PRICE", Balance.getInstance().GetDepositString());
 
 
@@ -106,4 +108,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+    @Override
+    protected void onResume()
+    {
+
+        super.onResume();
+
+        Balance.getInstance().loadDeposit(this);
+        Button Deposit = findViewById(R.id.CurrentDeposit);
+        Deposit.setText(Balance.getInstance().GetDepositString());
+
+    }
+
+
+
 }

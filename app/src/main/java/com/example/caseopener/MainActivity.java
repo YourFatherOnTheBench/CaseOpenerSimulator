@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         Button Contract;
         Contract = findViewById(R.id.Contract);
         Contract.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, Contract.class);
+            Intent intent = new Intent(MainActivity.this, Choose_Contract_Rarity.class);
             startActivity(intent);
         });
 

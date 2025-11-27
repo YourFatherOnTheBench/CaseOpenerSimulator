@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     int[] colors = {R.color.gray, R.color.darkgray, R.color.black, R.color.white, R.color.navy, R.color.darkblue, R.color.darknavy};
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +36,46 @@ public class MainActivity extends AppCompatActivity {
 
         SkinManager.getInstance().ReadFromJSON(this, "skins_reduced.json");
         CaseManager.getInstance().loadCases(this); // utworzenie caseManager
+<<<<<<< Updated upstream
+=======
+        EqManager.getInstance().loadSkins(this);
+        Balance.getInstance().loadDeposit(this);
+
+
+
+        Log.d("PRICE", Balance.getInstance().GetDepositString());
+
+
+        Button Deposit = findViewById(R.id.CurrentDeposit);
+        Deposit.setText(Balance.getInstance().GetDepositString());
+
+
+
+        ImageButton eq_btn = findViewById(R.id.eq_btn);
+        eq_btn.setOnClickListener(v -> {
+
+
+
+            Intent intent = new Intent(MainActivity.this, EQ_page.class);
+            startActivity(intent);
+
+
+        });
+
+
+        Button Contract;
+        Contract = findViewById(R.id.Contract);
+        Contract.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Contract.class);
+            startActivity(intent);
+        });
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
         // Only add views if the container is empty
         if (main_container.getChildCount() == 0) {

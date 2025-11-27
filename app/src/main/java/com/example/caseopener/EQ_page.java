@@ -11,6 +11,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,8 +35,9 @@ public class EQ_page extends AppCompatActivity {
 
 
 
-
-    ArrayList<String> Eq_list = new ArrayList<>();
+    Toast current_toast;
+    ArrayList<Integer> ChosenSkins = new ArrayList<>();
+    ArrayList<String> ChosenIds = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class EQ_page extends AppCompatActivity {
 
 
         Button Deposit = findViewById(R.id.CurrentDeposit);
-        Deposit.setText(EqManager.getInstance().GetMoneyString(this));
+        Deposit.setText(Balance.getInstance().GetDepositString());
 
         Log.d("EQ", EqManager.getInstance().acquiredSkins.toString());
 
@@ -98,10 +100,70 @@ public class EQ_page extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
+            Skin_block.setId(i);
+
+            Skin_block.setOnClickListener(v ->{
+                int BlockId = v.getId();
+                if(!ChosenSkins.contains(v.getId())) {
+
+                    ChosenSkins.add(v.getId());
+                    ChosenIds.add(EqManager.getInstance().acquiredSkins.get(BlockId));
+                    Log.d("EQSKIN", ChosenIds.toString());
+
+                    Skin_block.animate()
+                            .scaleX(0.95f)
+                            .scaleY(0.95f)
+                            .setDuration(20)
+                            .start();
+
+
+                }
+                else
+                {
+                    ChosenSkins.remove(v.getId());
+                    ChosenIds.remove(EqManager.getInstance().acquiredSkins.get(BlockId));
+                    Skin_block.animate()
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .setDuration(20)
+                            .start();
+                }
+
+            });
+
+
+
+
+
             gridLayout.addView(Skin_block);
 
 
         }
+        Button sellButton = findViewById(R.id.SellSkins_btn);
+        sellButton.setOnClickListener(v -> {
+            if(ChosenIds.size() <= 0) {
+
+                current_toast = Toast.makeText(this, "Nie wybrano żadnych skinnów", Toast.LENGTH_LONG);
+                current_toast.show();
+            }
+            else
+            {
+                for(int i = 0; i < ChosenIds.size(); i++) {
+                    String id = ChosenIds.get(i);
+                    EqManager.getInstance().removeSkin(this, id);
+                    Skin curr_skin = SkinManager.getInstance().skins_database.get(id);
+                    Balance.getInstance().SellSkin(this, Double.parseDouble(curr_skin.getPrice()));
+                }
+                current_toast = Toast.makeText(this, "Pomyślnie sprzedano skiny", Toast.LENGTH_LONG);
+                current_toast.show();
+                finish();
+            }
+
+
+
+
+        });
+
 
 
 

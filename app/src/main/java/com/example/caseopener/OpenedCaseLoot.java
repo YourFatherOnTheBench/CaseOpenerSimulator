@@ -23,6 +23,8 @@ import org.json.JSONObject;
 
 public class OpenedCaseLoot extends AppCompatActivity {
 
+
+    private Skin CurrentSkin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +45,13 @@ public class OpenedCaseLoot extends AppCompatActivity {
         Button Open;
         int Case_ID = getIntent().getIntExtra("CaseID",0);
         Button MainMenu;
-
+        CurrentSkin = SkinManager.getInstance().skins_database.get(SkinID);
         Sell = findViewById(R.id.Sell);
         Sell.setOnClickListener(v -> {
             EqManager.getInstance().removeSkin(this, SkinID);
 
+            Double price = Double.parseDouble(CurrentSkin.getPrice());
+            Balance.getInstance().SellSkin(this,price);
             Intent intentHere = new Intent(OpenedCaseLoot.this, MainActivity.class);
             intentHere.putExtra("Case_id", Case_ID);
             startActivity(intentHere);
@@ -63,6 +67,8 @@ public class OpenedCaseLoot extends AppCompatActivity {
         Open.setOnClickListener(v -> {
             String NewSkinID = SkinManager.RandomSkin_Generator(Case_ID);
             SetDroppedSkin(NewSkinID);
+            CurrentSkin = SkinManager.getInstance().skins_database.get(NewSkinID);
+
         });
 
         MainMenu = findViewById(R.id.MainMenu);

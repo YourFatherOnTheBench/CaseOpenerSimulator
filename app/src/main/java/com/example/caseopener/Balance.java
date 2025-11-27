@@ -3,6 +3,7 @@ package com.example.caseopener;
 import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONArray; // DODANY IMPORT
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,8 +17,6 @@ import java.io.FileNotFoundException;
 public class Balance {
 
     public double deposit = 0.0;
-    // You changed this from "balance.json" to "deposit.json".
-    // This effectively resets the user's money because the new file doesn't exist yet.
     private static final String FILENAME = "deposit.json";
 
     private static Balance instance;
@@ -30,6 +29,9 @@ public class Balance {
     }
 
     public void saveDeposit(Context context) {
+        // UWAGA: Zmieniłem format zapisu na pojedynczy obiekt,
+        // aby zachować prostotę i spójność: {"balance": 50.0}
+        // Jeśli chcesz zapisać jako tablicę, musiałbyś zmienić także tę metodę.
         try {
             JSONObject DepositObj = new JSONObject();
             DepositObj.put("balance", deposit);
@@ -58,23 +60,37 @@ public class Balance {
                 sb.append(line);
             }
 
-            // Move Logs here to verify content
             Log.d("BalanceManager", "File Content: " + sb.toString());
 
-            if (sb.length() == 0) return;
+            if (sb.length() == 0) {
+                Log.w("BalanceManager", "File is empty.");
+                return;
+            }
 
-            JSONObject balanceJson = new JSONObject(sb.toString());
-            deposit = balanceJson.optDouble("balance", 0.0);
+            // --- KRYTYCZNA POPRAWKA: Wczytaj jako JSONArray, jeśli format pliku jest tablicą ---
+            if (sb.toString().trim().startsWith("[")) {
+                JSONArray balanceArray = new JSONArray(sb.toString());
+                if (balanceArray.length() > 0) {
+                    JSONObject balanceJson = balanceArray.getJSONObject(0); // Pobierz pierwszy element
+                    deposit = balanceJson.optDouble("balance", 0.0);
+                } else {
+                    Log.w("BalanceManager", "JSON Array is empty.");
+                }
+            } else {
+                // Standardowe ładowanie, jeśli format to pojedynczy obiekt {"balance": 100}
+                JSONObject balanceJson = new JSONObject(sb.toString());
+                deposit = balanceJson.optDouble("balance", 0.0);
+            }
+            // -----------------------------------------------------------------------------------
 
             fis.close();
             Log.d("BalanceManager", "Loaded balance: " + deposit);
 
         } catch (FileNotFoundException e) {
-            // THIS is likely where your code was going before!
             Log.e("BalanceManager", "File not found (First run?). Starting with $0.00");
             deposit = 0.0;
         } catch (IOException | JSONException e) {
-            Log.e("BalanceManager", "Error loading balance: " + e.getMessage());
+            Log.e("BalanceManager", "Error loading balance (Check JSON format): " + e.getMessage());
             e.printStackTrace();
         }
     }

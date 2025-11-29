@@ -2,6 +2,7 @@ package com.example.caseopener;
 
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,6 +45,7 @@ public class Choose_Contract_Rarity extends AppCompatActivity {
         rarities.put("Restricted", 0);
         rarities.put("Classified", 0);
         rarities.put("Covert", 0);
+        rarities.put("Extraordinary", 0);
 
         for(int i = 0; i < EqManager.getInstance().acquiredSkins.size(); i++) {
 
@@ -52,13 +54,16 @@ public class Choose_Contract_Rarity extends AppCompatActivity {
             String id = EqManager.getInstance().acquiredSkins.get(i);
             Skin currentSkin = SkinManager.getInstance().skins_database.get(id);
 
-            Log.d("CURRENT SKIN: Rarity", currentSkin.getRarity());
-
             if (currentSkin != null) {
+                Log.d("CURRENT SKIN: Rarity", currentSkin.getRarity());
                 try {
                     JSONObject rarityJson = new JSONObject(currentSkin.getRarity());
                     String rarityName = rarityJson.getString("name");
-                    rarities.put(rarityName, rarities.getOrDefault(rarityName, 0) + 1);
+                    //if(rarities.get(rarityName) < 10)
+                    //{
+                        rarities.put(rarityName, rarities.getOrDefault(rarityName, 0) + 1);
+                    //}
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -68,17 +73,42 @@ public class Choose_Contract_Rarity extends AppCompatActivity {
 
         TextView Blue = findViewById(R.id.Blue);
         Blue.setText(rarities.get("Consumer Grade").toString() + "/10");
+        Blue.setOnClickListener(v -> {
+            Intent intent = new Intent(Choose_Contract_Rarity.this, Contract.class);
+            intent.putExtra("Rarity", "Consumer Grade");
+            startActivity(intent);
+        });
 
         TextView Purple = findViewById(R.id.Purple);
         Purple.setText(rarities.get("Mil-Spec Grade").toString() + "/10");
-
+        Purple.setOnClickListener(v -> {
+            Intent intent = new Intent(Choose_Contract_Rarity.this, Contract.class);
+            intent.putExtra("Rarity", "Mil-Spec Grade");
+            startActivity(intent);
+        });
         TextView Pink = findViewById(R.id.Pink);
         Pink.setText(rarities.get("Restricted").toString() + "/10");
+        Pink.setOnClickListener(v -> {
+            Intent intent = new Intent(Choose_Contract_Rarity.this, Contract.class);
+            intent.putExtra("Rarity", "Restricted");
+            startActivity(intent);
+        });
 
         TextView Red = findViewById(R.id.Red);
         Red.setText(rarities.get("Classified").toString() + "/10");
+        Red.setOnClickListener(v -> {
+            Intent intent = new Intent(Choose_Contract_Rarity.this, Contract.class);
+            intent.putExtra("Rarity", "Classified");
+            startActivity(intent);
+        });
 
         TextView Gold = findViewById(R.id.Gold);
         Gold.setText(rarities.get("Covert").toString() + "/10");
+        Gold.setOnClickListener(v -> {
+            Intent intent = new Intent(Choose_Contract_Rarity.this, Contract.class);
+            intent.putExtra("Rarity", "Covert");
+            startActivity(intent);
+        });
+
     }
 }

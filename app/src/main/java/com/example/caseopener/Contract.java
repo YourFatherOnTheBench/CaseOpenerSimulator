@@ -1,5 +1,8 @@
 package com.example.caseopener;
 
+import static com.example.caseopener.SkinManager.AllSkinRarities;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,12 +25,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Contract extends AppCompatActivity {
     //MAPA SKINOW W KONTRAKCIE
     Map<Integer, String> Skins_in_Contract = new HashMap<>();
     Toast cur_toast;
 
+    Button Contract;
     ArrayList<String> Eq_list = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +54,8 @@ public class Contract extends AppCompatActivity {
 
         Button menuButton = findViewById(R.id.Back_to_menu_btn);
 
-        String contractRarity = getIntent().getStringExtra("Rarity");
+        int rarityID = getIntent().getIntExtra("Rarity", 0);
+        String contractRarity = AllSkinRarities[rarityID];
 
         for(int i = 0; i < EqManager.getInstance().acquiredSkins.size(); i++) {
 
@@ -90,7 +96,7 @@ public class Contract extends AppCompatActivity {
                                 if (cur_toast != null) {
                                     cur_toast.cancel();
                                 }
-                                cur_toast = Toast.makeText(this, "Skin dodany do kontraktu(" + Skins_in_Contract.size() + " / 10)", Toast.LENGTH_SHORT);
+                                cur_toast = Toast.makeText(Contract.this, "Skin dodany do kontraktu(" + Skins_in_Contract.size() + " / 10)", Toast.LENGTH_SHORT);
                                 cur_toast.show();
                                 //animacja zaznaczenia
                                 Skin_block.animate()
@@ -104,7 +110,7 @@ public class Contract extends AppCompatActivity {
                                 if (cur_toast != null) {
                                     cur_toast.cancel();
                                 }
-                                cur_toast = Toast.makeText(this, "Skin usuniety z kontraktu(" + Skins_in_Contract.size() + " / 10)", Toast.LENGTH_SHORT);
+                                cur_toast = Toast.makeText(Contract.this, "Skin usuniety z kontraktu(" + Skins_in_Contract.size() + " / 10)", Toast.LENGTH_SHORT);
                                 cur_toast.show();
                                 //animacja odznaczenia
                                 Skin_block.animate()
@@ -117,7 +123,7 @@ public class Contract extends AppCompatActivity {
                                 if (cur_toast != null) {
                                     cur_toast.cancel();
                                 }
-                                cur_toast = Toast.makeText(this, "Kontrakt gotowy (" + Skins_in_Contract.size() + " / 10)", Toast.LENGTH_SHORT);
+                                cur_toast = Toast.makeText(Contract.this, "Kontrakt gotowy (" + Skins_in_Contract.size() + " / 10)", Toast.LENGTH_SHORT);
                                 cur_toast.show();
                             }
                         });
@@ -133,9 +139,38 @@ public class Contract extends AppCompatActivity {
         menuButton.setOnClickListener(v -> {
             finish();
         });
-    }
-    public void Chose_Skin_Rarity(String rarity)
-    {
+        Contract = findViewById(R.id.Contract);
+        Contract.setOnClickListener(v -> {
+            if (Skins_in_Contract.size() == 10) {
+//                    Random rand = new Random();
+//
+//                    String Skin_Rarity = "";
+//                    String rarity = "";
+//                    String skin = "";
+//                    do {
+//                        int SkinID = rand.nextInt(CaseManager.getInstance().cases.get(Case_position).skins.size());
+//                        skin = CaseManager.getInstance().cases.get(Case_position).skins.get(SkinID);
+//                        Skin RandomSkin = SkinManager.getInstance().skins_database.get(skin);
+//                        try {
+//                            JSONObject rarityJson = new JSONObject(RandomSkin.getRarity());
+//                            String rarityName = rarityJson.getString("name");
+//
+//                            Skin_Rarity = rarityName;
+//                        } catch (JSONException e) {
+//                            Skin_Rarity = RandomSkin.getRarity(); // Fallback
+//                            e.printStackTrace();
+                //przykladowy skin do kontraktu
+                Intent intent = new Intent(Contract.this, CompletedContract.class);
+                intent.putExtra("ContractRarityID","skin-e757fd7191f9");
+                startActivity(intent);
 
+            } else {
+                if (cur_toast != null) {
+                    cur_toast.cancel();
+                }
+                cur_toast = Toast.makeText(Contract.this, "Zaznacz 10 skinow do kontraktu", Toast.LENGTH_SHORT);
+                cur_toast.show();
+            }
+        });
     }
 }

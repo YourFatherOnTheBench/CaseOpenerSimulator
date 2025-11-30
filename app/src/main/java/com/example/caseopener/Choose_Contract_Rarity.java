@@ -7,6 +7,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,13 +35,16 @@ public class Choose_Contract_Rarity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_choose_contract_rarity);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+
+        Button Deposit = findViewById(R.id.CurrentDeposit);
+        Deposit.setText(Balance.getInstance().GetDepositString());
+        Button menuButton = findViewById(R.id.Back_to_menu_btn);
+
+
+
         rarities.put("Consumer Grade", 0);
         rarities.put("Mil-Spec Grade", 0);
         rarities.put("Restricted", 0);
@@ -110,5 +115,16 @@ public class Choose_Contract_Rarity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        ImageButton eq_btn = findViewById(R.id.eq_btn);
+        eq_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(this, EQ_page.class);
+            startActivity(intent);
+
+        });
+
+        menuButton.setOnClickListener(v -> {
+            finish();
+        });
     }
+
 }

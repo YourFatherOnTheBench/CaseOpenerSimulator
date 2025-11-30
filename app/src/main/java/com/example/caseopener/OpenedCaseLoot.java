@@ -3,13 +3,15 @@ package com.example.caseopener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -21,6 +23,8 @@ import com.bumptech.glide.Glide;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Set;
+
 public class OpenedCaseLoot extends AppCompatActivity {
 
 
@@ -28,23 +32,29 @@ public class OpenedCaseLoot extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_opened_case_loot);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+
+
+
+
+
+
+
+
         //Seting dropped skin
-        String SkinID = getIntent().getStringExtra("SkinID");
-        SetDroppedSkin(SkinID);
+
+
         //Funcyionality buttos
         Button Sell;
         Button Eq;
         Button Open;
+        String SkinID = getIntent().getStringExtra("SkinID");
         int Case_ID = getIntent().getIntExtra("CaseID",0);
         Button MainMenu;
+        LinearLayout dropContainer = findViewById(R.id.DropedSkin);
+        PlayAnimation(dropContainer, 3500, SkinID);
         CurrentSkin = SkinManager.getInstance().skins_database.get(SkinID);
         Sell = findViewById(R.id.Sell);
         Sell.setOnClickListener(v -> {
@@ -52,8 +62,10 @@ public class OpenedCaseLoot extends AppCompatActivity {
 
             Double price = Double.parseDouble(CurrentSkin.getPrice());
             Balance.getInstance().SellSkin(this,price);
-            Intent intentHere = new Intent(OpenedCaseLoot.this, MainActivity.class);
-            intentHere.putExtra("Case_id", Case_ID);
+
+            Intent intentHere = new Intent(OpenedCaseLoot.this, CaseOpening.class);
+            intentHere.putExtra("SkinID", SkinID);
+            intentHere.putExtra("position", Case_ID);
             startActivity(intentHere);
         });
 
@@ -66,7 +78,9 @@ public class OpenedCaseLoot extends AppCompatActivity {
         Open = findViewById(R.id.OpenNext);
         Open.setOnClickListener(v -> {
             String NewSkinID = SkinManager.RandomSkin_Generator(Case_ID);
-            SetDroppedSkin(NewSkinID);
+            ImageView gifView = findViewById(R.id.GifAnimation);
+            gifView.setVisibility(View.VISIBLE);
+            PlayAnimation(dropContainer, 3500, NewSkinID);
             CurrentSkin = SkinManager.getInstance().skins_database.get(NewSkinID);
 
         });
@@ -77,10 +91,11 @@ public class OpenedCaseLoot extends AppCompatActivity {
             startActivity(intentHere);
         });
     }
-    private void SetDroppedSkin(String SkinID)
+    public void SetDroppedSkin(String SkinID)
     {
 
         LinearLayout dropContainer = findViewById(R.id.DropedSkin);
+
         //removes previous skins
         dropContainer.removeAllViews();
 
@@ -116,11 +131,29 @@ public class OpenedCaseLoot extends AppCompatActivity {
                 rarity.setText(currentSkin.getRarity());
                 e.printStackTrace();
             }
+
         }
 
         // Add visual block to layout
         dropContainer.addView(skinBlock);
 
+
+    }
+
+    public void PlayAnimation(View skinBlock, long AnimationTime, String SkinId)
+    {
+        ImageView gifView = findViewById(R.id.GifAnimation);
+        Glide.with(this).asGif().load(R.drawable.zwybuchem).into(gifView);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                gifView.setVisibility(View.INVISIBLE);
+
+                SetDroppedSkin(SkinId);
+
+            }
+        }, AnimationTime);
 
     }
 }

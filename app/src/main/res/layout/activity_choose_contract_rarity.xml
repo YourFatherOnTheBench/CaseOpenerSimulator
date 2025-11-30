@@ -25,6 +25,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
+                    android:id="@+id/eq_btn"
                     android:src="@drawable/eqicon"
                     android:layout_width="75dp"
                     android:layout_height="75dp"

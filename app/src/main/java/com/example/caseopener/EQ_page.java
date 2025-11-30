@@ -1,5 +1,7 @@
 package com.example.caseopener;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.app.AlertDialog;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -38,24 +40,32 @@ public class EQ_page extends AppCompatActivity {
     Toast current_toast;
     ArrayList<Integer> ChosenSkins = new ArrayList<>();
     ArrayList<String> ChosenIds = new ArrayList<>();
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eq_page);
+        ChosenIds.clear();
+        ChosenSkins.clear();
+
+
+
 
 
         GridLayout gridLayout = findViewById(R.id.SkinBlockEQ);
         LayoutInflater inflater = LayoutInflater.from(this);
-
+        EqManager.getInstance().loadSkins(this);
+        Balance.getInstance().loadDeposit(this);
 
         Button Deposit = findViewById(R.id.CurrentDeposit);
         Deposit.setText(Balance.getInstance().GetDepositString());
+        Button menuButton = findViewById(R.id.Back_to_menu_btn);
 
         Log.d("EQ", EqManager.getInstance().acquiredSkins.toString());
 
 
 
-        Button menuButton = findViewById(R.id.Back_to_menu_btn);
+
 
 
 
@@ -143,8 +153,31 @@ public class EQ_page extends AppCompatActivity {
         sellButton.setOnClickListener(v -> {
             if(ChosenIds.size() <= 0) {
 
-                current_toast = Toast.makeText(this, "Nie wybrano żadnych skinnów", Toast.LENGTH_LONG);
-                current_toast.show();
+                new AlertDialog.Builder(this)
+                        .setTitle("Potwierdzenie sprzedaży")
+                        .setMessage("Czy na pewno chcesz sprzedać wszystkie skiny?")
+                        .setPositiveButton("Tak", (dialog, which) -> {
+                                    for (int i = 0; i < EqManager.getInstance().acquiredSkins.size(); i++) {
+                                       String id = EqManager.getInstance().acquiredSkins.get(i);
+
+                                       Skin curr_skin = SkinManager.getInstance().skins_database.get(id);
+                                       Balance.getInstance().SellSkin(this, Double.parseDouble(curr_skin.getPrice()));
+
+                                    }
+                                    EqManager.getInstance().acquiredSkins.clear();
+                                    EqManager.getInstance().saveSkins(this);
+                                    dialog.dismiss();
+                                finish();
+                                }).setNegativeButton("Nie", (dialog, which) -> {
+
+                            dialog.cancel();
+
+                        }).show();
+
+
+
+//                current_toast = Toast.makeText(this, "Nie wybrano żadnych skinnów", Toast.LENGTH_LONG);
+//                current_toast.show();
             }
             else
             {
@@ -157,6 +190,7 @@ public class EQ_page extends AppCompatActivity {
                 current_toast = Toast.makeText(this, "Pomyślnie sprzedano skiny", Toast.LENGTH_LONG);
                 current_toast.show();
                 finish();
+
             }
 
 
@@ -177,6 +211,14 @@ public class EQ_page extends AppCompatActivity {
 
 
 
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        EqManager.getInstance().loadSkins(this);
+        Balance.getInstance().loadDeposit(this);
 
     }
 

@@ -95,6 +95,8 @@ public class Balance {
         }
     }
 
+
+
     public double GetDeposit(){ return deposit; }
     public String GetDepositString(){ return String.format("$%.2f", deposit); }
 

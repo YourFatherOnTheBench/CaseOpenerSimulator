@@ -3,6 +3,7 @@ package com.example.caseopener;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,7 +72,7 @@ public class EQ_page extends AppCompatActivity {
 
         for(int i = 0; i < EqManager.getInstance().acquiredSkins.size(); i++) {
 
-            Log.d("EQ",EqManager.getInstance().acquiredSkins.get(i));
+
 
 
 
@@ -79,10 +80,7 @@ public class EQ_page extends AppCompatActivity {
             String id = EqManager.getInstance().acquiredSkins.get(i);
             Skin currentSkin = SkinManager.getInstance().skins_database.get(id);
 
-            Log.d("CURRENT SKIN", currentSkin.toString());
-            Log.d("CURRENT SKIN: NAME", currentSkin.getName());
-            Log.d("CURRENT SKIN: Rarity", currentSkin.getRarity());
-            Log.d("CURRENT SKIN: IMAGE", currentSkin.getImage());
+
 
 
 
@@ -118,7 +116,7 @@ public class EQ_page extends AppCompatActivity {
 
                     ChosenSkins.add(v.getId());
                     ChosenIds.add(EqManager.getInstance().acquiredSkins.get(BlockId));
-                    Log.d("EQSKIN", ChosenIds.toString());
+
 
                     Skin_block.animate()
                             .scaleX(0.95f)
@@ -130,7 +128,11 @@ public class EQ_page extends AppCompatActivity {
                 }
                 else
                 {
-                    ChosenSkins.remove(v.getId());
+
+                    ChosenSkins.remove((Integer)BlockId);
+
+
+
                     ChosenIds.remove(EqManager.getInstance().acquiredSkins.get(BlockId));
                     Skin_block.animate()
                             .scaleX(1f)
@@ -189,7 +191,8 @@ public class EQ_page extends AppCompatActivity {
                 }
                 current_toast = Toast.makeText(this, "Pomyślnie sprzedano skiny", Toast.LENGTH_LONG);
                 current_toast.show();
-                finish();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
 
             }
 

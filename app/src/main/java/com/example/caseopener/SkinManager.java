@@ -65,6 +65,10 @@ public class SkinManager {
         } else {
             rarity = "Extraordinary";
         }
+        if (Case_position == 4)
+        {
+            rarity = "Covert";
+        }
         String skin = "";
         do {
             int SkinID = rand.nextInt(CaseManager.getInstance().cases.get(Case_position).skins.size());

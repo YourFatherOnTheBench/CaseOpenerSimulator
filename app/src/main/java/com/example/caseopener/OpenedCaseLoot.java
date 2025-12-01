@@ -10,13 +10,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import androidx.activity.EdgeToEdge;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 
 import com.bumptech.glide.Glide;
 
@@ -54,7 +50,7 @@ public class OpenedCaseLoot extends AppCompatActivity {
         int Case_ID = getIntent().getIntExtra("CaseID",0);
         Button MainMenu;
         LinearLayout dropContainer = findViewById(R.id.DropedSkin);
-        PlayAnimation(dropContainer, 3500, SkinID);
+        PlayAnimation( 3500, SkinID);
         CurrentSkin = SkinManager.getInstance().skins_database.get(SkinID);
         Sell = findViewById(R.id.Sell);
         Sell.setOnClickListener(v -> {
@@ -80,8 +76,10 @@ public class OpenedCaseLoot extends AppCompatActivity {
             String NewSkinID = SkinManager.RandomSkin_Generator(Case_ID);
             ImageView gifView = findViewById(R.id.GifAnimation);
             gifView.setVisibility(View.VISIBLE);
-            PlayAnimation(dropContainer, 3500, NewSkinID);
-            CurrentSkin = SkinManager.getInstance().skins_database.get(NewSkinID);
+            dropContainer.removeAllViews();
+
+            PlayAnimation(3500, NewSkinID);
+            //CurrentSkin = SkinManager.getInstance().skins_database.get(NewSkinID);
 
         });
 
@@ -140,16 +138,19 @@ public class OpenedCaseLoot extends AppCompatActivity {
 
     }
 
-    public void PlayAnimation(View skinBlock, long AnimationTime, String SkinId)
+    public void PlayAnimation( long AnimationTime, String SkinId)
     {
+
+
         ImageView gifView = findViewById(R.id.GifAnimation);
-        Glide.with(this).asGif().load(R.drawable.zwybuchem).into(gifView);
+
+        Glide.with(this).asGif().load(R.drawable.gif2).into(gifView);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                gifView.setVisibility(View.INVISIBLE);
-
+                gifView.setVisibility(View.GONE);
+                //Glide.with(OpenedCaseLoot.this).clear(gifView);
                 SetDroppedSkin(SkinId);
 
             }

@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Log.d("PRICE", Balance.getInstance().GetDepositString());
 
 
         Button Deposit = findViewById(R.id.CurrentDeposit);
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 btn.setBackgroundColor(Color.parseColor("#375876"));
 
                 int finalI = i;
-                Log.d("Position", "Position: " + finalI);
+
                 btn.setOnClickListener(v ->
                         {
                             Intent intent = new Intent(MainActivity.this, CaseOpening.class);

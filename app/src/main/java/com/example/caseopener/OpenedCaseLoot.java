@@ -19,6 +19,9 @@ import com.bumptech.glide.Glide;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 public class OpenedCaseLoot extends AppCompatActivity {
@@ -29,15 +32,6 @@ public class OpenedCaseLoot extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opened_case_loot);
-
-
-
-
-
-
-
-
-
 
         //Seting dropped skin
 
@@ -79,13 +73,16 @@ public class OpenedCaseLoot extends AppCompatActivity {
         Open = findViewById(R.id.OpenNext);
         Open.setOnClickListener(v -> {
             if(can_clck) {
-                String NewSkinID = SkinManager.RandomSkin_Generator(Case_ID);
+                // Losowanie skina z całej puli
+                List<String> allSkinIds = new ArrayList<>(SkinManager.getInstance().skins_database.keySet());
+                String NewSkinID = allSkinIds.get(new Random().nextInt(allSkinIds.size()));
+
                 ImageView gifView = findViewById(R.id.GifAnimation);
                 gifView.setVisibility(View.VISIBLE);
                 dropContainer.removeAllViews();
 
                 PlayAnimation(3500, NewSkinID);
-                //CurrentSkin = SkinManager.getInstance().skins_database.get(NewSkinID);
+                CurrentSkin = SkinManager.getInstance().skins_database.get(NewSkinID);
             }
         });
 
@@ -141,8 +138,10 @@ public class OpenedCaseLoot extends AppCompatActivity {
 
         }
 
-        // Add visual block to layout
+        // Add the view and animate it for the grand reveal!
+        skinBlock.setAlpha(0f);
         dropContainer.addView(skinBlock);
+        skinBlock.animate().alpha(1f).setDuration(1500).start();
 
 
     }

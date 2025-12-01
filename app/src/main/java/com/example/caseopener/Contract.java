@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -54,7 +55,7 @@ public class Contract extends AppCompatActivity {
 
         Button menuButton = findViewById(R.id.Back_to_menu_btn);
 
-        int rarityID = getIntent().getIntExtra("Rarity", 0);
+        final int rarityID = getIntent().getIntExtra("Rarity", 0);
         String contractRarity = AllSkinRarities[rarityID];
 
         for(int i = 0; i < EqManager.getInstance().acquiredSkins.size(); i++) {
@@ -142,27 +143,38 @@ public class Contract extends AppCompatActivity {
         Contract = findViewById(R.id.Contract);
         Contract.setOnClickListener(v -> {
             if (Skins_in_Contract.size() == 10) {
-//                    Random rand = new Random();
-//
-//                    String Skin_Rarity = "";
-//                    String rarity = "";
-//                    String skin = "";
-//                    do {
-//                        int SkinID = rand.nextInt(CaseManager.getInstance().cases.get(Case_position).skins.size());
-//                        skin = CaseManager.getInstance().cases.get(Case_position).skins.get(SkinID);
-//                        Skin RandomSkin = SkinManager.getInstance().skins_database.get(skin);
-//                        try {
-//                            JSONObject rarityJson = new JSONObject(RandomSkin.getRarity());
-//                            String rarityName = rarityJson.getString("name");
-//
-//                            Skin_Rarity = rarityName;
-//                        } catch (JSONException e) {
-//                            Skin_Rarity = RandomSkin.getRarity(); // Fallback
-//                            e.printStackTrace();
-                //przykladowy skin do kontraktu
-                Intent intent = new Intent(Contract.this, CompletedContract.class);
-                intent.putExtra("ContractRarityID","skin-e757fd7191f9");
-                startActivity(intent);
+
+                if (rarityID + 1 < AllSkinRarities.length) {
+                    String nextRarity = AllSkinRarities[rarityID + 1];
+                    List<Skin> possibleSkins = new ArrayList<>();
+                    for (Skin skin : SkinManager.getInstance().skins_database.values()) {
+                        try {
+                            JSONObject rarityJson = new JSONObject(skin.getRarity());
+                            if (rarityJson.getString("name").equals(nextRarity)) {
+                                possibleSkins.add(skin);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    if (!possibleSkins.isEmpty()) {
+                        Random rand = new Random();
+                        Skin randomSkin = possibleSkins.get(rand.nextInt(possibleSkins.size()));
+
+                        for (String id : Skins_in_Contract.values()) {
+                            EqManager.getInstance().removeSkin(Contract.this, id);
+                        }
+
+                        Intent intent = new Intent(Contract.this, CompletedContract.class);
+                        intent.putExtra("ContractRarityID", randomSkin.getId());
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(Contract.this, "Brak skinów o wyższej rzadkości", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(Contract.this, "Osiągnięto maksymalną rzadkość", Toast.LENGTH_SHORT).show();
+                }
 
             } else {
                 if (cur_toast != null) {

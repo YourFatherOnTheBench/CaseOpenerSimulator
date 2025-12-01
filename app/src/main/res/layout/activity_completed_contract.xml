@@ -39,41 +39,39 @@
                 />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:paddingTop="20dp">
 
-            <LinearLayout
+            <Button
+                android:id="@+id/Sell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <Button
-                    android:backgroundTint="#375876"
-                    android:id="@+id/MainMenu"
-                    android:text="Main Menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"/>
-            </LinearLayout>
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#375876"
+                android:text="Sell" />
 
-
-            <LinearLayout
+            <Button
+                android:id="@+id/EQ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <Button
-                    android:backgroundTint="#375876"
-                    android:id="@+id/EQ"
-                    android:text="EQ"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"/>
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#375876"
+                android:text="EQ" />
 
-            </LinearLayout>
+            <Button
+                android:id="@+id/MainMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="#375876"
+                android:text="Main Menu" />
         </LinearLayout>
 
     </LinearLayout>
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

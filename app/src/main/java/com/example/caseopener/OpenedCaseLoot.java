@@ -23,7 +23,7 @@ import java.util.Set;
 
 public class OpenedCaseLoot extends AppCompatActivity {
 
-
+    boolean can_clck = false;
     private Skin CurrentSkin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,39 +54,48 @@ public class OpenedCaseLoot extends AppCompatActivity {
         CurrentSkin = SkinManager.getInstance().skins_database.get(SkinID);
         Sell = findViewById(R.id.Sell);
         Sell.setOnClickListener(v -> {
-            EqManager.getInstance().removeSkin(this, SkinID);
+            if(can_clck) {
+                EqManager.getInstance().removeSkin(this, SkinID);
 
-            Double price = Double.parseDouble(CurrentSkin.getPrice());
-            Balance.getInstance().SellSkin(this,price);
+                Double price = Double.parseDouble(CurrentSkin.getPrice());
+                Balance.getInstance().SellSkin(this, price);
 
-            Intent intentHere = new Intent(OpenedCaseLoot.this, CaseOpening.class);
-            intentHere.putExtra("SkinID", SkinID);
-            intentHere.putExtra("position", Case_ID);
-            startActivity(intentHere);
+                Intent intentHere = new Intent(OpenedCaseLoot.this, CaseOpening.class);
+                intentHere.putExtra("SkinID", SkinID);
+                intentHere.putExtra("position", Case_ID);
+                startActivity(intentHere);
+            }
         });
 
         Eq = findViewById(R.id.EQ);
         Eq.setOnClickListener(v -> {
-            Intent intentHere = new Intent(OpenedCaseLoot.this, EQ_page.class);
-            startActivity(intentHere);
+            if(can_clck)
+            {
+                Intent intentHere = new Intent(OpenedCaseLoot.this, EQ_page.class);
+                startActivity(intentHere);
+            }
         });
 
         Open = findViewById(R.id.OpenNext);
         Open.setOnClickListener(v -> {
-            String NewSkinID = SkinManager.RandomSkin_Generator(Case_ID);
-            ImageView gifView = findViewById(R.id.GifAnimation);
-            gifView.setVisibility(View.VISIBLE);
-            dropContainer.removeAllViews();
+            if(can_clck) {
+                String NewSkinID = SkinManager.RandomSkin_Generator(Case_ID);
+                ImageView gifView = findViewById(R.id.GifAnimation);
+                gifView.setVisibility(View.VISIBLE);
+                dropContainer.removeAllViews();
 
-            PlayAnimation(3500, NewSkinID);
-            //CurrentSkin = SkinManager.getInstance().skins_database.get(NewSkinID);
-
+                PlayAnimation(3500, NewSkinID);
+                //CurrentSkin = SkinManager.getInstance().skins_database.get(NewSkinID);
+            }
         });
 
         MainMenu = findViewById(R.id.MainMenu);
         MainMenu.setOnClickListener(v -> {
-            Intent intentHere = new Intent(OpenedCaseLoot.this, MainActivity.class);
-            startActivity(intentHere);
+            if(can_clck) {
+
+                Intent intentHere = new Intent(OpenedCaseLoot.this, MainActivity.class);
+                startActivity(intentHere);
+            }
         });
     }
     public void SetDroppedSkin(String SkinID)
@@ -140,7 +149,7 @@ public class OpenedCaseLoot extends AppCompatActivity {
 
     public void PlayAnimation( long AnimationTime, String SkinId)
     {
-
+        can_clck = false;
 
         ImageView gifView = findViewById(R.id.GifAnimation);
 
@@ -152,7 +161,7 @@ public class OpenedCaseLoot extends AppCompatActivity {
                 gifView.setVisibility(View.GONE);
                 //Glide.with(OpenedCaseLoot.this).clear(gifView);
                 SetDroppedSkin(SkinId);
-
+                can_clck = true;
             }
         }, AnimationTime);
 

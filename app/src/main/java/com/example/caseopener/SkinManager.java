@@ -38,7 +38,14 @@ public class SkinManager {
     }
 
 
-
+    static String [] AllSkinRarities = {
+            "Consumer Grade",
+            "Mil-Spec Grade",
+            "Restricted",
+            "Classified",
+            "Covert",
+            "Extraordinary"
+    };
 
     public Skin get(String id)
     {
